@@ -1,0 +1,7 @@
+{
+  "name": "trander-native",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue"
+}
