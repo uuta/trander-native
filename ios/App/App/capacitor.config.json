@@ -1,5 +1,5 @@
 {
-  "appId": "net.trander",
+  "appId": "io.ionic.starter",
   "appName": "trander-native",
   "bundledWebRuntime": false,
   "npmClient": "npm",
