@@ -1,0 +1,155 @@
+.p-setting {
+
+  &__wrap {
+    position: relative;
+
+    & .top-section {
+      margin: 20px 0;
+      height: 30px;
+    }
+  }
+
+  &__back {
+    position: absolute;
+    left: 1%;
+    top: 3%;
+    font-size: $font-big;
+    color: $primary;
+    transition: color .3s,
+    text-decoration .3s,
+    background-color .3s;
+
+    &:hover {
+      color: $primary-s;
+      cursor: pointer;
+    }
+  }
+
+  &__distance {
+
+    &__info {
+      margin-bottom: 20px;
+
+      & .title {
+        font-weight: normal;
+        color: $primary-v;
+        font-size: $font-big;
+        margin: 0;
+        font-weight: bold;
+      }
+
+      & .desc {
+        color: #8a8a8a;
+        margin: 0;
+      }
+    }
+
+    &__msg {
+      position: relative;
+      margin-bottom: 2em;
+
+      &__lf {
+        position: absolute;
+        display: inline-block;
+        left: 0;
+        color: $primary;
+      }
+
+      &__mid {
+        display: inline-block;
+      }
+
+      &__rf {
+        position: absolute;
+        display: inline-block;
+        right: 0;
+        color: $primary;
+      }
+    }
+  }
+
+  &__icon {
+    background: $primary-v;
+    border-radius: 50%;
+    -ms-flex-preferred-size: 16%;
+    display: block;
+    color: $base;
+    width: 45px;
+    height: 45px;
+    font-size: 20px;
+    line-height: 45px;
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 5%;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+  }
+
+  &__txt {
+    width: 60%;
+    padding-left: 0.5em;
+    margin: auto;
+    display: block;
+  }
+
+  &__next {
+    font-size: 20px;
+    color: $primary;
+    -ms-flex-preferred-size: 32%;
+    flex-basis: 20%;
+    position: absolute;
+    top: 35%;
+    right: 5%;
+  }
+
+  &__elm {
+    width: 60%;
+    margin: auto;
+
+    &:first-child {
+      margin-top: 20px;
+    }
+
+    &:last-child {
+      border-bottom: 1px solid $primary;
+    }
+
+    &__wrap {
+      border-top: 1px solid $primary;
+      width: 100%;
+      text-align: left;
+      position: relative;
+      border-radius: 0;
+      background-color: #fff;
+      min-height: 80px;
+
+      &:hover {
+        border-color: $primary-v;
+        transition: color .3s,
+        text-decoration .3s,
+        background-color .3s;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .p-setting {
+    &__elm {
+      width: 90%;
+
+      &__wrap {
+        width: 100%;
+        background: $base;
+      }
+    }
+    &__distance {
+      &__info {
+        & .title {
+          font-size: $vw6;
+        }
+      }
+    }
+  }
+}
