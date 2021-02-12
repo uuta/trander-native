@@ -8,7 +8,8 @@
     "test:unit": "vue-cli-service test:unit",
     "test:e2e": "vue-cli-service test:e2e",
     "lint": "vue-cli-service lint",
-    "copy": "npm run build && npx cap copy"
+    "copy": "npm run build && npx cap copy",
+    "watch": "node-sass --watch --include-path scss resources/sass/app.scss public/css/app.css --output-style compressed"
   },
   "dependencies": {
     "@capacitor/android": "^2.4.6",
@@ -37,10 +38,9 @@
     "@vue/test-utils": "^2.0.0-0",
     "browser-sync": "^2.26.14",
     "browser-sync-webpack-plugin": "^2.2.2",
-    "cross-env": "^7.0.3",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^7.0.0-0",
-    "laravel-mix": "^6.0.11",
+    "node-sass": "^5.0.0",
     "resolve-url-loader": "^3.1.2",
     "sass": "^1.32.7",
     "sass-loader": "^8.0.2",
