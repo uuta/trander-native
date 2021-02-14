@@ -2,11 +2,16 @@ import { createRouter, createWebHistory } from '@ionic/vue-router';
 import { RouteRecordRaw } from 'vue-router';
 import Tabs from '../views/Tabs.vue'
 import OnBoading from '../pages/OnBoading.vue'
+import Login from '../pages/Login.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     component: OnBoading
+  },
+  {
+    path: '/login',
+    component: Login
   },
   {
     path: '/tabs/',
