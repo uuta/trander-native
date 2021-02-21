@@ -76,7 +76,7 @@ const actions = {
         router
     }) {
         context.commit('setApiStatus', null)
-        const response = await axios.post('/api/login', data)
+        const response = await axios.post('https://trander.net/api/login', data)
 
         if (response.status === OK) {
             context.commit('setApiStatus', true)

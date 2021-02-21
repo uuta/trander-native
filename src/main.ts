@@ -2,6 +2,8 @@ import { createApp } from 'vue';
 import App from './App.vue';
 import router from './router';
 import { store } from "./store";
+import '@fortawesome/fontawesome-free/css/all.css';
+import '@fortawesome/fontawesome-free/js/all.js';
 
 import { IonicVue } from '@ionic/vue';
 
@@ -25,7 +27,7 @@ import '@ionic/vue/css/display.css';
 import './theme/variables.css';
 
 /* Trander CSS */
-import './public/css/app.css';
+import '../dist/css/app.css';
 
 const app = createApp(App)
   .use(IonicVue)

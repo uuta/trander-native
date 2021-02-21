@@ -8,18 +8,21 @@
   &__name::before {
     @extend .c-icon;
     content: "\f007";
-    font-family: FontAwesome;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
   }
 
   &__email::before {
     @extend .c-icon;
     content: "\f0e0";
-    font-family: FontAwesome;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
   }
 
   &__pwd::before {
     @extend .c-icon;
     content: "\f023";
-    font-family: FontAwesome;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
   }
 }
