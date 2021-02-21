@@ -27,7 +27,7 @@ import '@ionic/vue/css/display.css';
 import './theme/variables.css';
 
 /* Trander CSS */
-import '../dist/css/app.css';
+import '../public/css/app.css';
 
 const app = createApp(App)
   .use(IonicVue)
