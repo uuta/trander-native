@@ -2,7 +2,7 @@ import {
     OK,
     CREATED,
     UNPROCESSABLE_ENTITY
-} from '../util'
+} from '../const/util'
 import axios from 'axios';
 
 const state = {
@@ -55,7 +55,7 @@ const actions = {
         router
     }) {
         context.commit('setApiStatus', null)
-        const response = await axios.post('/api/register', data)
+        const response = await axios.post('http://localhost:10080/api/register', data)
         if (response.status === CREATED) {
             context.commit('setApiStatus', true)
             context.commit('setUser', response.data)
@@ -76,7 +76,7 @@ const actions = {
         router
     }) {
         context.commit('setApiStatus', null)
-        const response = await axios.post('https://trander.net/api/login', data)
+        const response = await axios.post('http://localhost:10080/api/login', data)
 
         if (response.status === OK) {
             context.commit('setApiStatus', true)

@@ -3,6 +3,7 @@ import { RouteRecordRaw } from 'vue-router';
 import Tabs from '../views/Tabs.vue'
 import OnBoading from '../pages/OnBoading.vue'
 import Login from '../pages/Login.vue'
+import { store } from '../store'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -11,7 +12,15 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: '/login',
-    component: Login
+    component: Login,
+    beforeEnter(to, from, next) {
+      // FIXME: store.gettersが動作しない
+      if (store.getters['auth/check']) {
+        next('/index')
+      } else {
+        next()
+      }
+    }
   },
   {
     path: '/tabs/',
