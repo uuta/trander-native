@@ -1,0 +1,225 @@
+<template>
+  <div class="container p-city_detail">
+    <vue-progress-bar></vue-progress-bar>
+    <Bars v-show="loading"></Bars>
+    <div id="map" v-bind:class="{show_city_detail: isShowCityDetail}">
+      <Registration v-if="registerModal"></Registration>
+      <Error></Error>
+      <SuggestCurrentLocation v-if="geoLocationModal"></SuggestCurrentLocation>
+      <Setting></Setting>
+      <GmapMap :center="targetLocation" :zoom="14" :options="{disableDefaultUI:true}" style="width: 100%; height: 100%;">
+        <gmap-marker :position="{lat:currentLat, lng:currentLng}" :icon="iconCenter">
+        </gmap-marker>
+        <gmap-marker v-if="icon" :position="targetLocation">
+        </gmap-marker>
+      </GmapMap>
+      <KwModal v-if="kwModal"></KwModal>
+      <MapInfo></MapInfo>
+      <button class="button_map_setting"><i class="fas fa-cog" @click.self="showSettingModal"></i></button>
+      <Searched></Searched>
+    </div>
+    <CityDetail></CityDetail>
+  </div>
+</template>
+
+<script>
+import { mapState } from 'vuex'
+import Setting from '@/components/organisms/index/Setting.vue'
+import CityDetail from '@/pages/cityDetails/Index.vue'
+import MapInfo from '@/components/organisms/index/MapInfo.vue'
+import KwModal from '@/components/organisms/kw/Modal.vue'
+import Registration from '@/components/molecules/modals/Registration.vue'
+import Searched from '@/components/organisms/index/Searched.vue'
+import SuggestCurrentLocation from '@/components/organisms/index/CurrentLocation.vue'
+import Error from '@/components/organisms/errors/Modal.vue'
+import Bars from '@/components/atoms/loader/Bars.vue'
+import CONST_EXTERNAL from '@/const/external.ts'
+import { BROWSER, URL_TYPE } from '@/const/common.ts'
+import { checkBrowser } from '@/services/common/checkBrowser.ts'
+
+export default {
+  components: {
+    Setting,
+    CityDetail,
+    MapInfo,
+    KwModal,
+    Registration,
+    Searched,
+    SuggestCurrentLocation,
+    Error,
+    Bars,
+  },
+  data() {
+    return {
+      iconCenter: {
+        url: '/assets/images/current_location.png',
+        scaledSize: {width: 30, height: 30, f: 'px', b: 'px'}
+      },
+      targetLocation: {
+        lng: 0,
+        lat: 0,
+      },
+    }
+  },
+  created() {
+    this.SUGGEST = CONST_EXTERNAL.CURRENT_LOCATION_SUGGEST
+    this.checkRegistration()
+    this.judgeGeoLocation()
+    this.setSearchingUrl()
+    this.$store.commit('external/setSettingModal', false)
+  },
+  computed: {
+    ...mapState({
+      lat: state => state.external.lat,
+      lng: state => state.external.lng,
+      currentLat: state => state.external.currentLat,
+      currentLng: state => state.external.currentLng,
+      icon: state => state.external.icon,
+      wikiDataId: state => state.external.wikiDataId,
+      settingModal: state => state.external.settingModal,
+      errorMessages: state => state.external.errorMessages,
+      geoLocationModal: state => state.external.geoLocationModal,
+      registerModal: state => state.auth.registerModal,
+      kwModal: state => state.kw.modal,
+      kwSuccessful: state => state.kw.successful,
+      kwLat: state => state.kw.lat,
+      kwLng: state => state.kw.lng,
+      loading: state => state.common.loading,
+    }),
+    isShowCityDetail() {
+      return Boolean(Object.keys(this.$route.params).length)
+    },
+  },
+  methods: {
+    judgeGeoLocation() {
+      // In case, browser doesn't support
+      if (!navigator.geolocation) {
+        this.$store.commit('external/setGeoLocationSetting', this.SUGGEST.BROWSER)
+      }
+
+      // Check a browser name
+      const browser = checkBrowser();
+
+      // Permission of current location setting
+      if (browser === BROWSER.EDGE || browser === BROWSER.CHROME || browser === BROWSER.FIREFOX || browser === BROWSER.OPERA) {
+        navigator.permissions.query({name: 'geolocation'}).then(result => {
+          if(result.state === 'granted') {
+            this.getCurrentLocation()
+          }
+          if(result.state === 'prompt') {
+            this.$store.commit('external/setGeoLocationSetting', this.SUGGEST.SUGGEST)
+            this.getCurrentLocation()
+          }
+          if(result.state === 'denied') {
+            this.$store.commit('external/setGeoLocationSetting', this.SUGGEST.PERMISSION)
+          }
+          result.onchange = function() {
+            if(result.state === 'granted') {
+              this.getCurrentLocation()
+            }
+            if(result.state === 'denied') {
+              this.$store.commit('external/setGeoLocationSetting', this.SUGGEST.PERMISSION)
+            }
+          }
+        })
+      } else {
+        this.getCurrentLocation()
+      }
+    },
+    getCurrentLocation() {
+      const options = {
+        enableHighAccuracy: false,
+        timeout: 10000,
+        maximumAge: 0,
+      }
+
+      navigator.geolocation.getCurrentPosition(this.successGetCurrentPosition, this.errorGetCurrentPosition, options)
+    },
+    async successGetCurrentPosition(position) {
+      const data = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      }
+      await this.$store.dispatch('external/getLoading', data)
+      this.$store.commit('common/setLoading', false)
+
+      if (Object.keys(this.$route.params).length) {
+        const cityId = {
+          params: {
+            id: Number(this.$route.params.cityId),
+          }
+        }
+        await this.$store.dispatch('external/getCityById', cityId)
+
+        const distanceLatLng = {
+          params: {
+            lat: this.currentLat,
+            lng: this.currentLng,
+            cityLat: this.lat,
+            cityLng: this.lng,
+          }
+        }
+        const latLng = {
+          params: {
+            lat: this.lat,
+            lng: this.lng,
+          }
+        }
+        const wiki = {
+          params: {
+            wikiId: this.wikiDataId,
+          }
+        }
+        this.$store.dispatch('external/getDistance', distanceLatLng)
+        this.$store.dispatch('external/getHotel', latLng)
+        this.$store.dispatch('external/getFacility', latLng)
+        this.$store.dispatch('external/getWeather', latLng)
+        this.$store.dispatch('external/getWiki', wiki)
+      }
+    },
+    errorGetCurrentPosition(error) {
+      // Show an error modal
+      switch (error.code) {
+        case 1: // Permission denied
+          this.$store.commit('external/setGeoLocationSetting', this.SUGGEST.PERMISSION)
+          break
+        case 2: // Position unavailable
+          this.$store.commit('external/setGeoLocationSetting', this.SUGGEST.UNAVAILABLE)
+          break
+        case 3: // Timeout
+          this.$store.commit('external/setGeoLocationSetting', this.SUGGEST.TIMEOUT)
+          break
+        default:
+          this.$store.commit('external/setGeoLocationSetting', this.SUGGEST.UNAVAILABLE)
+          break
+      }
+      this.$store.commit('common/setLoading', false)
+    },
+    checkRegistration() {
+      this.$store.dispatch('auth/checkRegistration')
+    },
+    hiddenModal() {
+      this.$store.commit('external/setModal', false)
+    },
+    showSettingModal() {
+      this.$store.commit('external/setSettingModal', true)
+    },
+    setSearchingUrl() {
+      const url = this.$route.path.indexOf('index') != -1
+        ? URL_TYPE.CITY
+        : URL_TYPE.KW
+      this.$store.commit('external/setSearchingUrl', url)
+    },
+  },
+  watch: {
+    lat() {
+      this.targetLocation.lat = this.lat
+      this.targetLocation.lng = this.lng
+    },
+    kwLat() {
+      this.targetLocation.lat = Number(this.kwLat)
+      this.targetLocation.lng = Number(this.kwLng)
+    },
+  }
+}
+</script>

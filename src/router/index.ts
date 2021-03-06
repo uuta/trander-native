@@ -1,18 +1,28 @@
 import { createRouter, createWebHistory } from '@ionic/vue-router';
 import { RouteRecordRaw } from 'vue-router';
 import Tabs from '../views/Tabs.vue'
-import OnBoading from '../pages/OnBoading.vue'
-import Login from '../pages/Login.vue'
 import { store } from '../store'
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    component: OnBoading
+    component: () => import('@/pages/OnBoading.vue'),
   },
   {
     path: '/login',
-    component: Login,
+    component: () => import('@/pages/Login.vue'),
+    beforeEnter(to, from, next) {
+      // FIXME: store.gettersが動作しない
+      if (store.getters['auth/check']) {
+        next('/index')
+      } else {
+        next()
+      }
+    }
+  },
+  {
+    path: '/index',
+    component: () => import('@/pages/Index.vue'),
     beforeEnter(to, from, next) {
       // FIXME: store.gettersが動作しない
       if (store.getters['auth/check']) {
