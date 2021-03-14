@@ -1,8 +1,8 @@
 <template>
   <dl class="map_info_introduction">
-    <dt class="title">知らない街に行ってみよう</dt>
+    <dt class="title">Explore the cities</dt>
     <dd class="list">
-      {{ username }}さん、こんにちは！<br>
+      Hi, {{ username }}!<br>
       ボタンを押して、近くの街を探してみましょう。
     </dd>
   </dl>

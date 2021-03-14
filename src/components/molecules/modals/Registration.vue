@@ -1,5 +1,5 @@
 <template>
-  <div class="c-modal__overlay" @click.self="hiddenRegisterModal">
+  <div class="c-modal__overlay" @click="hiddenRegisterModal">
     <div class="c-modal__overlay__wrap__sml">
       <div class="c-modal__msg__section">
         <div>
@@ -8,7 +8,7 @@
         <p>旅の準備が整いました。</p>
         </div>
       </div>
-      <button class="button__modal" @click.self="hiddenRegisterModal">OK</button>
+      <button class="button__modal" @click="hiddenRegisterModal">OK</button>
     </div>
   </div>
 </template>

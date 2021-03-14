@@ -1,5 +1,5 @@
 <template>
-  <div class="c-modal__overlay" @click.self="hiddenModal" v-if="errorModal">
+  <div class="c-modal__overlay" @click="hiddenModal" v-if="errorModal">
     <div class="c-modal__overlay__wrap__sml">
       <div class="c-modal__msg__section error">
         <div>
@@ -9,14 +9,14 @@
             </p>
         </div>
       </div>
-      <button class="button__modal error" @click.self="hiddenModal">OK</button>
+      <button class="button__modal error" @click="hiddenModal">OK</button>
     </div>
   </div>
 </template>
 
 
 <script>
-import { mapState, mapGetters } from 'vuex'
+import { mapState } from 'vuex'
 
 export default {
   computed: {

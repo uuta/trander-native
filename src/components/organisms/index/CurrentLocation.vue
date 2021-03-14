@@ -1,5 +1,5 @@
 <template>
-  <div class="c-modal__overlay" @click.self="hiddenModal">
+  <div class="c-modal__overlay" @click="hiddenModal">
     <div class="c-modal__overlay__wrap__sml">
       <div class="c-modal__msg__section">
         <div v-if="geoLocationSetting === SUGGEST.BROWSER">
@@ -35,7 +35,7 @@
           </p>
         </div>
       </div>
-      <button class="button__modal" @click.self="hiddenModal">OK</button>
+      <button class="button__modal" @click="hiddenModal">OK</button>
     </div>
   </div>
 </template>

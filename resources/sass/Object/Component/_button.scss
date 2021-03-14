@@ -1,5 +1,4 @@
 .button {
-  border: 1px solid $sub;
   border-radius: 0.25rem;
   color: $sub-v;
   cursor: pointer;
@@ -195,7 +194,8 @@
     background: $base;
     &:before {
       content: "\f00d";
-      font-family: FontAwesome;
+      font-family: "Font Awesome 5 Free";
+      font-weight: 900;
       padding-right: 0.5em;
     }
   }

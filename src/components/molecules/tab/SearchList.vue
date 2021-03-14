@@ -2,22 +2,24 @@
   <nav class="map_tab">
     <ul class="lists">
       <li class="list">
-        <RouterLink
-          :to="{name: 'index'}"
+        <ion-tab-button
+          href="/index/city"
           v-bind:class="{active: searchingUrl === URL_TYPE.CITY}"
           @click="changeActive(URL_TYPE.CITY)"
+          class="switch"
         >
-          街検索
-        </RouterLink>
+          City
+        </ion-tab-button>
       </li>
       <li class="list">
-        <RouterLink
-          :to="{name: 'keyword'}"
+        <ion-tab-button
+          href="/index/kw"
           v-bind:class="{active: searchingUrl === URL_TYPE.KW}"
           @click="changeActive(URL_TYPE.KW)"
+          class="switch"
         >
-          キーワード検索
-        </RouterLink>
+          Keyword
+        </ion-tab-button>
       </li>
     </ul>
   </nav>

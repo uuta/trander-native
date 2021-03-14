@@ -93,7 +93,7 @@ const actions = {
     },
     async logout(context, router) {
         context.commit('setApiStatus', null)
-        const response = await axios.post('/api/logout')
+        const response = await axios.post('http://localhost:10080/api/logout')
 
         if (response.status === OK) {
             context.commit('setApiStatus', true)
@@ -106,7 +106,7 @@ const actions = {
     },
     async currentUser(context) {
         context.commit('setApiStatus', null)
-        const response = await axios.get('/api/user')
+        const response = await axios.get('http://localhost:10080/api/user')
         const user = response.data || null
 
         if (response.status === OK) {
@@ -119,7 +119,7 @@ const actions = {
         context.commit('error/setCode', response.status, { root: true })
     },
     async checkRegistration(context) {
-        const response = await axios.get('/api/user')
+        const response = await axios.get('http://localhost:10080/api/user')
         const check = response.data.check_registration || null
 
         if (response.status === OK) {
@@ -128,14 +128,14 @@ const actions = {
     },
     async hiddenRegisterModal(context) {
         context.commit('setRegisterModal', false)
-        await axios.post('/api/change-registration')
+        await axios.post('http://localhost:10080/api/change-registration')
     },
     async resetPassword(context, {
         data,
         router
     }) {
         context.commit('setApiStatus', null)
-        const response = await axios.post('/api/reset-password', data)
+        const response = await axios.post('http://localhost:10080/api/reset-password', data)
 
         if (response.status === OK) {
             context.commit('setEmail', data)
@@ -158,7 +158,7 @@ const actions = {
     }) {
         context.commit('setApiStatus', null)
         data['token'] = router.app._route.params.token
-        const response = await axios.post('/api/regenerate-password', data)
+        const response = await axios.post('http://localhost:10080/api/regenerate-password', data)
         if (response.status === OK) {
             context.commit('setApiStatus', true)
             context.commit('setUser', response.data)

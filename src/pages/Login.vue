@@ -50,9 +50,9 @@
                   autocomplete="current-password"
                 />
               </div>
-              <RouterLink to="/reset-password" class="panel__txt__right">
+              <ion-router-link href="/reset-password" class="panel__txt__right">
                 パスワードをお忘れですか？
-              </RouterLink>
+              </ion-router-link>
               <div class="form__sns__wrap">
                 <a class="form__sns__btn" href="/api/social/twitter"><i class="fab fa-twitter"></i></a>
                 <a class="form__sns__btn" href="/api/social/facebook"

@@ -83,10 +83,8 @@ export default {
       this.showProgressBar(data, router)
     },
     async showProgressBar(data, router) {
-      this.$Progress.start()
       await this.$store.dispatch('external/setNewLocation', {data, router})
       this.setCityDetail()
-      this.$Progress.finish()
     },
     setCityDetail() {
       const latLng = {
@@ -116,7 +114,6 @@ export default {
           directionType: this.directionType,
         }
       }
-      this.$Progress.start()
       await this.$store.dispatch('kw/getNearBySearch', data)
       const distanceLatLng = {
         params: {
@@ -127,7 +124,6 @@ export default {
         }
       }
       await this.$store.dispatch('kw/getDistance', distanceLatLng)
-      this.$Progress.finish()
     },
   },
 }

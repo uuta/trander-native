@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex'
+import { mapState } from 'vuex'
 import GeneralInput from '../../../atoms/input/GeneralInput.vue'
 
 export default {

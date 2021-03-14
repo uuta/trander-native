@@ -1,0 +1,9 @@
+ion-header {
+  &.nml {
+    height: 4rem;
+  }
+
+  &.shadow {
+    box-shadow: 0 3px 8px 0 rgba(0, 0, 0, .1);
+  }
+}

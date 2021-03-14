@@ -1,9 +1,9 @@
 <template>
-  <div id="map_overlay" v-if="settingModal" @click.self="hiddenSettingModal">
+  <div id="map_overlay" v-if="settingModal" @click="hiddenSettingModal">
     <div id="map_overlay_wrap">
       <div class="container--small p-setting__wrap">
         <div class="top-section"></div>
-        <i class="fas fa-arrow-left p-setting__back" @click.self="hiddenSettingModal"></i>
+        <i class="fas fa-arrow-left p-setting__back" @click="hiddenSettingModal"></i>
         <div class="p-setting__distance__wrap">
           <div class="p-setting__distance__info">
             <p class="title">次の地点までの距離</p>

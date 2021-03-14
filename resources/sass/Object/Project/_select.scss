@@ -43,7 +43,8 @@
 
         &:after {
           content: "\f00c";
-          font-family: FontAwesome;
+          font-family: "Font Awesome 5 Free";
+          font-weight: 900;
           color: $base;
           position: absolute;
           top: 50%;

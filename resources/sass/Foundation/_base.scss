@@ -41,6 +41,10 @@ input {
   background: $base;
 }
 
+button {
+  outline: none;
+}
+
 @media screen and (max-width: 480px) {
   main {
     margin-bottom: 0;

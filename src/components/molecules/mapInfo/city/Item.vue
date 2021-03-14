@@ -26,12 +26,13 @@
         ]"></i></li>
       </ul>
     </dd>
-    <RouterLink v-if="showAngleBtn" class="negate_btn show_detail" :to="{name: 'cityDetail', params: {cityId: cityId}}">
+    <!-- TODO: -->
+    <!-- <RouterLink v-if="showAngleBtn" class="negate_btn show_detail" :to="{name: 'cityDetail', params: {cityId: cityId}}">
       <button class="item_btn"><i class="fas fa-angle-up"></i></button>
     </RouterLink>
     <RouterLink v-else class="negate_btn show_detail" :to="{name: 'index'}">
       <button class="item_btn"><i class="fas fa-angle-right"></i></button>
-    </RouterLink>
+    </RouterLink> -->
   </dl>
 </template>
 

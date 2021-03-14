@@ -1,5 +1,5 @@
 <template>
-  <div class="c-modal__overlay" v-if="modal" @click.self="hiddenModal">
+  <div class="c-modal__overlay" v-if="modal" @click="hiddenModal">
     <div class="c-modal__overlay__wrap__sml">
       <div class="c-modal__msg__section">
         <div>
@@ -13,7 +13,7 @@
           <p> 早速、冒険に出てみましょう！</p>
         </div>
       </div>
-      <button class="button__modal" @click.self="hiddenModal">OK</button>
+      <button class="button__modal" @click="hiddenModal">OK</button>
     </div>
   </div>
 </template>

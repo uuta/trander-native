@@ -1,0 +1,20 @@
+.c-box {
+  margin: 20px;
+  box-shadow: 8px 5px 8px 1px rgba(0, 0, 0, .1);
+  border-radius: 10px;
+
+  .wrap {
+    padding: 20px;
+  }
+
+  &_title_desc {
+    .title {
+      font-size: $font-big;
+      display: block;
+    }
+    .desc {
+      font-size: $font-sml;
+      display: block;
+    }
+  }
+}
