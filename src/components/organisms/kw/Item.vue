@@ -72,7 +72,6 @@ import IconText from '../../atoms/container/IconText.vue'
 import Rating from '../../atoms/container/Rating.vue'
 import Keyword from '../../molecules/mapInfo/kw/Keyword.vue'
 import ValidationCommon from '../../atoms/validations/Common.vue'
-import SliderTextList from '../../atoms/slider/TextList.vue'
 import ContainerIconText from '../../atoms/container/IconText.vue'
 
 export default {
@@ -99,7 +98,6 @@ export default {
     Rating,
     Keyword,
     ValidationCommon,
-    SliderTextList,
     ContainerIconText,
   },
   computed: {

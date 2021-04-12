@@ -10,7 +10,7 @@
     "lint": "vue-cli-service lint",
     "copy": "npm run build && npx cap copy",
     "watch": "vue-cli-service build --watch",
-    "sass": "node-sass --include-path scss resources/sass/app.scss public/css/app.css"
+    "sass": "node-sass --include-path scss resources/sass/app.scss public/css/app.css --watch"
   },
   "dependencies": {
     "@capacitor/android": "^2.4.6",

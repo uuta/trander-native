@@ -13,7 +13,7 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: '/index',
-    component: () => import('@/pages/index/Index.vue'),
+    component: () => import('@/pages/index/City.vue'),
     children: [
       {
         path: '',
@@ -28,7 +28,6 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('@/pages/index/City.vue')
       },
     ]
-
   },
   {
     path: '/tabs/',

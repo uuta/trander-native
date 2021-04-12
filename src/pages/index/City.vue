@@ -58,6 +58,7 @@ export default {
     Setting,
   },
   data() {
+    // FIX:
     const center = { lat: 40.689247, lng: -74.044502 };
     return { center };
   },

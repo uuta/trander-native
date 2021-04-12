@@ -20,7 +20,6 @@
 import { mapState } from "vuex";
 import Keyword from "../../molecules/mapInfo/kw/Keyword.vue";
 import ValidationCommon from "../../atoms/validations/Common.vue";
-import SliderTextList from "../../atoms/slider/TextList.vue";
 
 export default {
   data() {
@@ -40,7 +39,6 @@ export default {
   components: {
     Keyword,
     ValidationCommon,
-    SliderTextList,
   },
   computed: {
     ...mapState({

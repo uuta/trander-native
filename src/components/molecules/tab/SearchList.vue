@@ -2,48 +2,52 @@
   <nav class="map_tab">
     <ul class="lists">
       <li class="list">
-        <ion-tab-button
-          href="/index/city"
-          v-bind:class="{active: searchingUrl === URL_TYPE.CITY}"
+        <button
           @click="changeActive(URL_TYPE.CITY)"
+          :class="{ active: searchingUrl === URL_TYPE.CITY }"
           class="switch"
         >
           City
-        </ion-tab-button>
+        </button>
       </li>
       <li class="list">
-        <ion-tab-button
-          href="/index/kw"
-          v-bind:class="{active: searchingUrl === URL_TYPE.KW}"
+        <button
           @click="changeActive(URL_TYPE.KW)"
+          :class="{ active: searchingUrl === URL_TYPE.KW }"
           class="switch"
         >
           Keyword
-        </ion-tab-button>
+        </button>
       </li>
     </ul>
   </nav>
 </template>
 
 <script>
-import { mapState } from 'vuex'
-import { URL_TYPE } from '@/const/common.ts'
+import { mapState } from "vuex";
+import { URL_TYPE } from "@/const/common.ts";
 
 export default {
   data() {
     return {
       URL_TYPE,
-    }
+    };
   },
   computed: {
     ...mapState({
-      searchingUrl: state => state.external.searchingUrl,
+      searchingUrl: (state) => state.external.searchingUrl,
     }),
   },
   methods: {
     changeActive(value) {
-      this.$store.commit('external/setSearchingUrl', value)
-    }
+      this.$store.commit("external/setSearchingUrl", value);
+      if (value === URL_TYPE.CITY) {
+        this.$router.push('/index/city');
+      }
+      if (value === URL_TYPE.KW) {
+        this.$router.push('/index/kw');
+      }
+    },
   },
-}
+};
 </script>
