@@ -1,15 +1,29 @@
 import { createRouter, createWebHistory } from '@ionic/vue-router';
 import { RouteRecordRaw } from 'vue-router';
-import Tabs from '../views/Tabs.vue'
+import { store } from '@/store'
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     component: () => import('@/pages/OnBoading.vue'),
+    beforeEnter(to, from, next) {
+      if (store.getters['auth/check']) {
+        next('/index')
+      } else {
+        next()
+      }
+    }
   },
   {
     path: '/login',
     component: () => import('@/pages/Login.vue'),
+    beforeEnter(to, from, next) {
+      if (store.getters['auth/check']) {
+        next('/index')
+      } else {
+        next()
+      }
+    }
   },
   {
     path: '/index',
@@ -21,36 +35,28 @@ const routes: Array<RouteRecordRaw> = [
       },
       {
         path: 'city',
-        component: () => import('@/pages/index/City.vue')
+        component: () => import('@/pages/index/City.vue'),
+        beforeEnter(to, from, next) {
+          if (!store.getters['auth/check']) {
+            next('/login')
+          } else {
+            next()
+          }
+        }
       },
       {
         path: 'kw',
-        component: () => import('@/pages/index/City.vue')
+        component: () => import('@/pages/index/City.vue'),
+        beforeEnter(to, from, next) {
+          if (!store.getters['auth/check']) {
+            next('/login')
+          } else {
+            next()
+          }
+        }
       },
     ]
   },
-  {
-    path: '/tabs/',
-    component: Tabs,
-    children: [
-      {
-        path: '',
-        redirect: '/tabs/tab1'
-      },
-      {
-        path: 'tab1',
-        component: () => import('@/views/Tab1.vue')
-      },
-      {
-        path: 'tab2',
-        component: () => import('@/views/Tab2.vue')
-      },
-      {
-        path: 'tab3',
-        component: () => import('@/views/Tab3.vue')
-      }
-    ]
-  }
 ]
 
 const router = createRouter({
