@@ -1,4 +1,4 @@
-import { DIRECTION_TYPE } from '@/const/external'
+import { DIRECTION_TYPE } from "@/const/external";
 
 export class Setting {
   /**
@@ -8,17 +8,19 @@ export class Setting {
    * @return {string}
    */
   judgeSettingIcon(value) {
-    return value ? 'fa-caret-down' : 'fa-caret-right'
+    return value ? "fa-caret-down" : "fa-caret-right";
   }
 
   /**
    * Depending on the direction type, return text for direction
    *
    * @param {int} directionType
-   * @return {string}
+   * @return {string
    */
   setDirectionText(directionType) {
-    const obj = Object.entries(DIRECTION_TYPE).filter(DIRECTION_TYPE => DIRECTION_TYPE[1].NUM === directionType)
-    return obj[0][1].TEXT
+    const obj = Object.entries(DIRECTION_TYPE).filter(
+      (DIRECTION_TYPE) => DIRECTION_TYPE[1].NUM === directionType
+    );
+    return obj[0][1].TEXT;
   }
 }
