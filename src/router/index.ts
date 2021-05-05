@@ -18,11 +18,13 @@ const routes: Array<RouteRecordRaw> = [
     path: '/login',
     component: () => import('@/pages/Login.vue'),
     beforeEnter(to, from, next) {
-      if (store.getters['auth/check']) {
-        next('/index')
-      } else {
-        next()
-      }
+      store.dispatch('auth/currentUser').then(() => {
+        if (store.getters['auth/check']) {
+          next('/index')
+        } else {
+          next()
+        }
+      });
     }
   },
   {
@@ -37,11 +39,13 @@ const routes: Array<RouteRecordRaw> = [
         path: 'city',
         component: () => import('@/pages/index/City.vue'),
         beforeEnter(to, from, next) {
-          if (!store.getters['auth/check']) {
-            next('/login')
-          } else {
-            next()
-          }
+          store.dispatch('auth/currentUser').then(() => {
+            if (!store.getters['auth/check']) {
+              next('/login')
+            } else {
+              next()
+            }
+          });
         }
       },
       {

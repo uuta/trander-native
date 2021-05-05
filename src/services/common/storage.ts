@@ -3,6 +3,10 @@ import { Plugins } from "@capacitor/core";
 const { Storage } = Plugins;
 
 export class ServiceStorage {
+  static get KEY_API_TOKEN() {
+    return 'apiToken';
+  }
+
   /**
    * e.g Set object
    */
@@ -45,9 +49,8 @@ export class ServiceStorage {
    * @param key Key of Storage
    * @returns value
    */
-  static async getItem(key: string): Promise<string | null> {
-    const { value } = await Storage.get({ key: key });
-    return value;
+  static getItem(key: string) {
+    return Storage.get({ key: key });
   }
 
   /**

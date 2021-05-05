@@ -4,6 +4,7 @@ import {
     UNPROCESSABLE_ENTITY
 } from '../const/util'
 import axios from 'axios';
+import { ServiceStorage } from '@/services/common/storage';
 
 const state = {
     user: null,
@@ -81,6 +82,10 @@ const actions = {
         if (response.status === OK) {
             context.commit('setApiStatus', true)
             context.commit('setUser', response.data)
+
+            // Store a token
+            ServiceStorage.setItem(ServiceStorage.KEY_API_TOKEN, response.data.api_token);
+
             router.push('/index')
             return false
         }
@@ -106,10 +111,19 @@ const actions = {
     },
     async currentUser(context) {
         context.commit('setApiStatus', null)
-        const response = await axios.get('http://localhost:10080/api/user')
+
+        // Get the token from storage
+        const apiToken = await ServiceStorage.getItem(ServiceStorage.KEY_API_TOKEN);
+        const param = {
+            params: {
+                api_token: apiToken.value
+            }
+        }
+        const response = await axios.get('http://localhost:10080/api/user', param)
         const user = response.data || null
 
         if (response.status === OK) {
+            console.log('bbbbbbbbb')
             context.commit('setApiStatus', true)
             context.commit('setUser', user)
             return false

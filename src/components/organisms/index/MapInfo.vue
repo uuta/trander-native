@@ -37,6 +37,7 @@ import CityIntroduction from '../../molecules/mapInfo/city/Introduction.vue'
 import KwIntroduction from '../kw/Introduction.vue'
 import KwItem from '../kw/Item.vue'
 import SearchList from '../../molecules/tab/SearchList.vue'
+import { ServiceStorage } from '@/services/common/storage';
 
 export default {
   data() {
@@ -104,6 +105,8 @@ export default {
       this.$store.dispatch('external/getWiki', wiki)
     },
     async setLocationByKw() {
+      console.log(process.env.API_DOMAIN)
+      const apiToken = await ServiceStorage.getItem(ServiceStorage.KEY_API_TOKEN)
       const data = {
         params: {
           lat: this.currentLat,
@@ -112,6 +115,7 @@ export default {
           min: this.rangeOfDistance[0],
           max: this.rangeOfDistance[1],
           directionType: this.directionType,
+          api_token: apiToken.value,
         }
       }
       await this.$store.dispatch('kw/getNearBySearch', data)
@@ -121,6 +125,7 @@ export default {
           lng: this.currentLng,
           cityLat: this.kwLat,
           cityLng: this.kwLng,
+          api_token: apiToken.value,
         }
       }
       await this.$store.dispatch('kw/getDistance', distanceLatLng)
