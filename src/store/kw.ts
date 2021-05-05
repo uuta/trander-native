@@ -4,6 +4,7 @@ import {
   UNPROCESSABLE_ENTITY,
 } from '../const/util'
 import axios from 'axios';
+import { API } from '@/const/api';
 
 const state = {
   keyword: '',
@@ -101,7 +102,7 @@ const mutations = {
 const actions = {
   // Get nearBySearch
   async getNearBySearch(context, params) {
-    const res = await axios.get('http://localhost:10080/api/external/near-by-search', params)
+    const res = await axios.get(API.NEAR_BY_SEARCH, params)
     const resData = res.data
 
     if (res.status === OK) {
@@ -119,7 +120,7 @@ const actions = {
   },
   // Get distance
   async getDistance(context, params) {
-    const res = await axios.get('http://localhost:10080/api/distance', params)
+    const res = await axios.get(API.DISTANCE, params)
     const resData = res.data
 
     if (res.status === OK) {
@@ -137,7 +138,7 @@ const actions = {
   },
   // Get google place
   async getGooglePlace(context, params) {
-    const res = await axios.get('http://localhost:10080/api/google-place', params)
+    const res = await axios.get(API.GOOGLE_PLACE, params)
     const resData = res.data
 
     if (res.status === OK) {

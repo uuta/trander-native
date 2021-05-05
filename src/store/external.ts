@@ -8,6 +8,7 @@ import axios from 'axios';
 import {
   DIRECTION_TYPE
 } from '../const/external'
+import { API } from '@/const/api';
 
 
 const state = {
@@ -146,7 +147,7 @@ const mutations = {
 
 const actions = {
   async getLoading(context, data) {
-    const res = await axios.get('http://localhost:10080/api/setting')
+    const res = await axios.get(API.SETTING)
 
     // レスポンスが空ではない時の処理
     if (res.status === OK && Object.keys(res.data).length) {
@@ -167,7 +168,7 @@ const actions = {
   },
   async setNewLocation(context, { data }) {
     context.commit('setSuggestPushing', false)
-    const res = await axios.post('http://localhost:10080/api/external/geo-db-cities', data)
+    const res = await axios.post(API.GEO_DB_CITIES, data)
 
     // レスポンスが空ではない時の処理
     if (res.status === OK && res.data.status === OK) {
@@ -184,14 +185,14 @@ const actions = {
   async setSetting(context, { states, parameters }) {
     context.commit('setSetting', states)
     context.commit('setSettingModal', false)
-    await axios.post('http://localhost:10080/api/setting', parameters)
+    await axios.post(API.SETTING, parameters)
   },
   async setDirectionType(context, data) {
     context.commit('setDirectionType', data)
   },
   // Hotel
   async getHotel(context, params) {
-    const res = await axios.get('http://localhost:10080/api/external/hotel', params)
+    const res = await axios.get(API.HOTEL, params)
     const resData = res.data
 
     if (res.status === OK) {
@@ -209,7 +210,7 @@ const actions = {
   },
   // Facility
   async getFacility(context, params) {
-    const res = await axios.get('http://localhost:10080/api/external/facility', params)
+    const res = await axios.get(API.FACILITY, params)
     const resData = res.data
 
     if (res.status === OK) {
@@ -227,7 +228,7 @@ const actions = {
   },
   // Weather
   async getWeather(context, params) {
-    const res = await axios.get('http://localhost:10080/api/external/weather', params)
+    const res = await axios.get(API.WEATHER, params)
     const resData = res.data
 
     if (res.status === OK) {
@@ -245,7 +246,7 @@ const actions = {
   },
   // Wiki
   async getWiki(context, params) {
-    const res = await axios.get('http://localhost:10080/api/external/wiki-city', params)
+    const res = await axios.get(API.WIKI_CITY, params)
     const resData = res.data
 
     if (res.status === OK) {
@@ -263,7 +264,7 @@ const actions = {
   },
   // Get geo-db-cities
   async getCityById(context, params) {
-    const res = await axios.get('http://localhost:10080/api/external/geo-db-cities', params)
+    const res = await axios.get(API.GEO_DB_CITIES, params)
     const resData = res.data
 
     if (res.status === OK) {
@@ -281,7 +282,7 @@ const actions = {
   },
   // Get distance
   async getDistance(context, params) {
-    const res = await axios.get('http://localhost:10080/api/distance', params)
+    const res = await axios.get(API.DISTANCE, params)
     const resData = res.data
 
     if (res.status === OK) {
