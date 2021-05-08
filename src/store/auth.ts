@@ -55,6 +55,13 @@ const actions = {
       context.commit("setApiStatus", true);
       context.commit("setUser", response.data);
       context.commit("setRegisterModal", true);
+
+      // Store a token
+      ServiceStorage.setItem(
+        ServiceStorage.KEY_API_TOKEN,
+        response.data.apiToken
+      );
+
       router.push("/index");
       return false;
     }
@@ -77,7 +84,7 @@ const actions = {
       // Store a token
       ServiceStorage.setItem(
         ServiceStorage.KEY_API_TOKEN,
-        response.data.api_token
+        response.data.apiToken
       );
 
       router.push("/index");
@@ -134,9 +141,9 @@ const actions = {
       context.commit("setRegisterModal", check);
     }
   },
-  async hiddenRegisterModal(context) {
+  async hiddenRegisterModal(context, params) {
     context.commit("setRegisterModal", false);
-    await axios.post(API.CHANGE_REGISTRATION);
+    await axios.post(API.CHANGE_REGISTRATION, params);
   },
   async resetPassword(context, { data, router }) {
     context.commit("setApiStatus", null);

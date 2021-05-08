@@ -3,9 +3,9 @@
     <div class="c-modal__overlay__wrap__sml">
       <div class="c-modal__msg__section">
         <div>
-        <p class="c-head_title__mid__modal">登録できました！</p>
-        <p>ありがとうございます{{ username }}さん。</p>
-        <p>旅の準備が整いました。</p>
+          <p class="c-head_title__mid__modal">登録できました！</p>
+          <p>ありがとうございます{{ username }}さん。</p>
+          <p>旅の準備が整いました。</p>
         </div>
       </div>
       <button class="button__modal" @click="hiddenRegisterModal">OK</button>
@@ -14,22 +14,29 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState } from "vuex";
+import { ServiceStorage } from "@/services/common/storage";
 
 export default {
   computed: {
     ...mapState({
-      username: state => state.auth.user
+      username: (state) => state.auth.user,
     }),
     username() {
-      return this.$store.getters['auth/username']
-    }
+      return this.$store.getters["auth/username"];
+    },
   },
   methods: {
-    hiddenRegisterModal() {
-      this.$store.dispatch('auth/hiddenRegisterModal')
-      this.$store.commit('external/setSuggestPushing', true)
-    }
-  }
-}
+    async hiddenRegisterModal() {
+      const apiToken = await ServiceStorage.getItem(
+        ServiceStorage.KEY_API_TOKEN
+      );
+      const params = {
+        apiToken: apiToken.value,
+      };
+      this.$store.dispatch("auth/hiddenRegisterModal", params);
+      this.$store.commit("external/setSuggestPushing", true);
+    },
+  },
+};
 </script>
