@@ -106,9 +106,6 @@ export default {
       this.$store.dispatch("external/getWiki", wiki);
     },
     async setLocationByKw() {
-      const apiToken = await ServiceStorage.getItem(
-        ServiceStorage.KEY_API_TOKEN
-      );
       const data = {
         params: {
           lat: this.currentLat,
@@ -117,10 +114,8 @@ export default {
           min: this.rangeOfDistance[0],
           max: this.rangeOfDistance[1],
           directionType: this.directionType,
-          apiToken: apiToken.value,
         },
       };
-      console.log(data);
       await this.$store.dispatch("kw/getNearBySearch", data);
       const distanceLatLng = {
         params: {
@@ -128,7 +123,6 @@ export default {
           lng: this.currentLng,
           cityLat: this.kwLat,
           cityLng: this.kwLng,
-          apiToken: apiToken.value,
         },
       };
       await this.$store.dispatch("kw/getDistance", distanceLatLng);

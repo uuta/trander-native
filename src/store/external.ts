@@ -148,13 +148,7 @@ const mutations = {
 
 const actions = {
   async getLoading(context, data) {
-    const apiToken = await ServiceStorage.getItem(ServiceStorage.KEY_API_TOKEN);
-    const settingParam = {
-      params: {
-        apiToken: apiToken.value,
-      }
-    }
-    const res = await axios.get(API.SETTING, settingParam)
+    const res = await axios.get(API.SETTING)
 
     if (res.status === OK && Object.keys(res.data).length) {
       const settings = {

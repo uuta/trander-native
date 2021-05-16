@@ -75,7 +75,7 @@ const actions = {
   },
   async login(context, { data, router }) {
     context.commit("setApiStatus", null);
-    const response = await axios.post(API.LOGIN, data);
+    const response = await axios.post(API.LOGIN, data)
 
     if (response.status === OK) {
       context.commit("setApiStatus", true);
@@ -113,14 +113,7 @@ const actions = {
   async currentUser(context) {
     context.commit("setApiStatus", null);
 
-    // Get the token from storage
-    const apiToken = await ServiceStorage.getItem(ServiceStorage.KEY_API_TOKEN);
-    const param = {
-      params: {
-        apiToken: apiToken.value,
-      },
-    };
-    const response = await axios.get(API.USER, param);
+    const response = await axios.get(API.USER);
     const user = response.data || null;
 
     if (response.status === OK) {

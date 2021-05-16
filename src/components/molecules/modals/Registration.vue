@@ -15,7 +15,6 @@
 
 <script>
 import { mapState } from "vuex";
-import { ServiceStorage } from "@/services/common/storage";
 
 export default {
   computed: {
@@ -28,13 +27,7 @@ export default {
   },
   methods: {
     async hiddenRegisterModal() {
-      const apiToken = await ServiceStorage.getItem(
-        ServiceStorage.KEY_API_TOKEN
-      );
-      const params = {
-        apiToken: apiToken.value,
-      };
-      this.$store.dispatch("auth/hiddenRegisterModal", params);
+      this.$store.dispatch("auth/hiddenRegisterModal");
       this.$store.commit("external/setSuggestPushing", true);
     },
   },

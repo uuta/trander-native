@@ -30,10 +30,15 @@ import "./theme/variables.css";
 /* Trander CSS */
 import "../public/css/app.css";
 
+import axios from "axios";
+
 const app = createApp(App)
   .use(IonicVue)
   .use(store)
   .use(router);
+
+// Use axios globally
+app.config.globalProperties.$axios = axios;
 
 router.isReady().then(() => {
   app.mount("#app");

@@ -1,4 +1,5 @@
 import { createStore } from 'vuex'
+import "@/token";
 import auth from './auth'
 import error from './error'
 import external from './external'
