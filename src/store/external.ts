@@ -4,6 +4,7 @@ import {
   UNPROCESSABLE_ENTITY,
 } from '../const/util'
 import axios from 'axios';
+import { ServiceStorage } from "@/services/common/storage";
 
 import {
   DIRECTION_TYPE
@@ -147,9 +148,14 @@ const mutations = {
 
 const actions = {
   async getLoading(context, data) {
-    const res = await axios.get(API.SETTING)
+    const apiToken = await ServiceStorage.getItem(ServiceStorage.KEY_API_TOKEN);
+    const settingParam = {
+      params: {
+        apiToken: apiToken.value,
+      }
+    }
+    const res = await axios.get(API.SETTING, settingParam)
 
-    // レスポンスが空ではない時の処理
     if (res.status === OK && Object.keys(res.data).length) {
       const settings = {
         distance: [
@@ -161,8 +167,12 @@ const actions = {
       context.commit('setSetting', settings)
     }
 
+    // TODO:
+    // レスポンスが空の時の処理
+    // Error handling
+
     // 現在地をセット
-    context.commit('setCurrentLocation', data)
+    context.commit('setCurrentLocation', data.param)
     // 現在地権限モーダルの削除
     context.commit('setGeoLocationModal', false)
   },

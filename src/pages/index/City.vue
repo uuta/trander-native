@@ -6,6 +6,7 @@
         <Registration v-if="registerModal"></Registration>
         <Error></Error>
         <Setting></Setting>
+        <!-- FIXME: -->
         <GoogleMap
           api-key="AIzaSyAcqtDRzXizxuI8ejthIrszBo5DS88mKN4"
           style="width: 100%; height: 100%"
@@ -16,9 +17,6 @@
         </GoogleMap>
         <KwModal v-if="kwModal"></KwModal>
         <MapInfo></MapInfo>
-        <button class="button_map_setting" @click="showSettingModal">
-          <i class="fas fa-cog"></i>
-        </button>
         <Searched></Searched>
       </div>
     </ion-content>
@@ -27,10 +25,7 @@
 
 <script lang="ts">
 // @ts-nocheck
-import {
-  IonPage,
-  IonContent,
-} from "@ionic/vue";
+import { IonPage, IonContent } from "@ionic/vue";
 import { GoogleMap, Marker } from "vue3-google-map";
 import { mapState } from "vuex";
 import Error from "@/components/organisms/errors/Modal.vue";
@@ -41,6 +36,10 @@ import Registration from "@/components/molecules/modals/Registration.vue";
 import Searched from "@/components/organisms/index/Searched.vue";
 import Setting from "@/components/organisms/index/Setting.vue";
 import { URL_TYPE } from "@/const/common";
+import { Plugins } from "@capacitor/core";
+import { ServiceStorage } from "@/services/common/storage";
+
+const { Geolocation } = Plugins;
 
 export default {
   name: "City",
@@ -61,10 +60,6 @@ export default {
     // FIX:
     const center = { lat: 40.689247, lng: -74.044502 };
     return { center };
-  },
-  created() {
-    this.setSearchingUrl();
-    this.$store.commit("external/setSettingModal", false);
   },
   computed: {
     ...mapState({
@@ -87,15 +82,43 @@ export default {
     isShowCityDetail() {
       return Boolean(Object.keys(this.$route.params).length);
     },
+    setTargetLocation() {
+      return { lat: this.lat, lng: this.lng };
+    },
+    setCurrentLocation() {
+      return { lat: this.currentLat, lng: this.currentLng };
+    },
+  },
+  created() {
+    this.setSearchingUrl();
+    this.getCurrentPosition();
   },
   methods: {
-    showSettingModal() {
-      this.$store.commit("external/setSettingModal", true);
-    },
     setSearchingUrl() {
       const url =
         this.$route.path.indexOf("city") != -1 ? URL_TYPE.CITY : URL_TYPE.KW;
       this.$store.commit("external/setSearchingUrl", url);
+    },
+    async getCurrentPosition() {
+      const coordinates = await Geolocation.getCurrentPosition(
+        {
+          enableHighAccuracy: true,
+        },
+        (position, err) => {
+          // TODO: Error handling
+          console.log("error", err);
+        }
+      );
+      const apiToken = await ServiceStorage.getItem(ServiceStorage.KEY_API_TOKEN);
+      const param = {
+        param: {
+          lat: coordinates.coords.latitude,
+          lng: coordinates.coords.longitude,
+          apiToken: apiToken.value,
+        }
+      }
+      await this.$store.dispatch('external/getLoading', param)
+      this.$store.commit('common/setLoading', false)
     },
   },
 };
