@@ -10,10 +10,11 @@
         <GoogleMap
           api-key="AIzaSyAcqtDRzXizxuI8ejthIrszBo5DS88mKN4"
           style="width: 100%; height: 100%"
-          :center="center"
+          :center="targetLocation"
           :zoom="14"
         >
-          <Marker :options="{ position: center }" />
+          <Marker :options="{ position: currentLocation, icon: iconCurrent }" />
+          <Marker v-if="icon" :options="{ position: targetLocation }" />
         </GoogleMap>
         <KwModal v-if="kwModal"></KwModal>
         <MapInfo></MapInfo>
@@ -57,9 +58,12 @@ export default {
     Setting,
   },
   data() {
-    // FIX:
-    const center = { lat: 40.689247, lng: -74.044502 };
-    return { center };
+    return {
+      iconCurrent: {
+        url: "/assets/current_location.png",
+        scaledSize: { width: 30, height: 30, f: "px", b: "px" },
+      },
+    };
   },
   computed: {
     ...mapState({
@@ -82,10 +86,10 @@ export default {
     isShowCityDetail() {
       return Boolean(Object.keys(this.$route.params).length);
     },
-    setTargetLocation() {
+    targetLocation() {
       return { lat: this.lat, lng: this.lng };
     },
-    setCurrentLocation() {
+    currentLocation() {
       return { lat: this.currentLat, lng: this.currentLng };
     },
   },
@@ -109,16 +113,18 @@ export default {
           console.log("error", err);
         }
       );
-      const apiToken = await ServiceStorage.getItem(ServiceStorage.KEY_API_TOKEN);
+      const apiToken = await ServiceStorage.getItem(
+        ServiceStorage.KEY_API_TOKEN
+      );
       const param = {
         param: {
           lat: coordinates.coords.latitude,
           lng: coordinates.coords.longitude,
           apiToken: apiToken.value,
-        }
-      }
-      await this.$store.dispatch('external/getLoading', param)
-      this.$store.commit('common/setLoading', false)
+        },
+      };
+      await this.$store.dispatch("external/getLoading", param);
+      this.$store.commit("common/setLoading", false);
     },
   },
 };
