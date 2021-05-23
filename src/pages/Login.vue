@@ -2,17 +2,25 @@
   <ion-page>
     <ion-header>
       <ion-toolbar>
-        <ion-title><img src="/assets/icon/logo.png"></ion-title>
+        <ion-title><img src="/assets/icon/logo.png"/></ion-title>
       </ion-toolbar>
     </ion-header>
     <ion-content :fullscreen="true">
       <div class="container">
         <div class="container--small">
           <ul class="tab">
-            <li class="tab__item" :class="{'tab__item--active': tab === 1}" @click="tab = 1">
+            <li
+              class="tab__item"
+              :class="{ 'tab__item--active': tab === 1 }"
+              @click="tab = 1"
+            >
               ログイン
             </li>
-            <li class="tab__item" :class="{'tab__item--active': tab === 2}" @click="tab = 2">
+            <li
+              class="tab__item"
+              :class="{ 'tab__item--active': tab === 2 }"
+              @click="tab = 2"
+            >
               会員登録
             </li>
           </ul>
@@ -23,7 +31,9 @@
                   <li v-for="msg in loginErrors.email" :key="msg">{{ msg }}</li>
                 </ul>
                 <ul v-if="loginErrors.password">
-                  <li v-for="msg in loginErrors.password" :key="msg">{{ msg }}</li>
+                  <li v-for="msg in loginErrors.password" :key="msg">
+                    {{ msg }}
+                  </li>
                 </ul>
               </div>
               <label for="login-email">メールアドレス</label>
@@ -54,14 +64,20 @@
                 パスワードをお忘れですか？
               </ion-router-link>
               <div class="form__sns__wrap">
-                <a class="form__sns__btn" href="/api/social/twitter"><i class="fab fa-twitter"></i></a>
+                <a class="form__sns__btn" href="/api/social/twitter"
+                  ><i class="fab fa-twitter"></i
+                ></a>
                 <a class="form__sns__btn" href="/api/social/facebook"
                   ><i class="fab fa-facebook-f"></i
                 ></a>
-                <a class="form__sns__btn" href="/api/social/google"><i class="fab fa-google"></i></a>
+                <a class="form__sns__btn" href="/api/social/google"
+                  ><i class="fab fa-google"></i
+                ></a>
               </div>
               <div class="form__button">
-                <button type="submit" class="button button--inverse">ログインする</button>
+                <button type="submit" class="button button--inverse">
+                  ログインする
+                </button>
               </div>
             </form>
           </div>
@@ -73,22 +89,37 @@
             <form class="form" @submit.prevent="register">
               <div v-if="registerErrors" class="errors">
                 <ul v-if="registerErrors.name">
-                  <li v-for="msg in registerErrors.name" :key="msg">{{ msg }}</li>
+                  <li v-for="msg in registerErrors.name" :key="msg">
+                    {{ msg }}
+                  </li>
                 </ul>
                 <ul v-if="registerErrors.email">
-                  <li v-for="msg in registerErrors.email" :key="msg">{{ msg }}</li>
+                  <li v-for="msg in registerErrors.email" :key="msg">
+                    {{ msg }}
+                  </li>
                 </ul>
                 <ul v-if="registerErrors.password">
-                  <li v-for="msg in registerErrors.password" :key="msg">{{ msg }}</li>
+                  <li v-for="msg in registerErrors.password" :key="msg">
+                    {{ msg }}
+                  </li>
                 </ul>
                 <ul v-if="registerErrors.passwordConfirmation">
-                  <li v-for="msg in registerErrors.passwordConfirmation" :key="msg">{{ msg }}</li>
+                  <li
+                    v-for="msg in registerErrors.passwordConfirmation"
+                    :key="msg"
+                  >
+                    {{ msg }}
+                  </li>
                 </ul>
                 <ul v-if="registerErrors.termsOfService">
-                  <li v-for="msg in registerErrors.termsOfService" :key="msg">{{ msg }}</li>
+                  <li v-for="msg in registerErrors.termsOfService" :key="msg">
+                    {{ msg }}
+                  </li>
                 </ul>
                 <ul v-if="registerErrors.privacyPolicy">
-                  <li v-for="msg in registerErrors.privacyPolicy" :key="msg">{{ msg }}</li>
+                  <li v-for="msg in registerErrors.privacyPolicy" :key="msg">
+                    {{ msg }}
+                  </li>
                 </ul>
               </div>
               <label for="username">お名前</label>
@@ -140,7 +171,10 @@
               <div class="list-menu">
                 <ul>
                   <label
-                    ><input type="checkbox" v-model="registerForm.termsOfService"/><button
+                    ><input
+                      type="checkbox"
+                      v-model="registerForm.termsOfService"
+                    /><button
                       class="button link"
                       type="button"
                       @click="moveLink(`/terms-of-service`)"
@@ -151,7 +185,10 @@
                 </ul>
                 <ul>
                   <label
-                    ><input type="checkbox" v-model="registerForm.privacyPolicy"/><button
+                    ><input
+                      type="checkbox"
+                      v-model="registerForm.privacyPolicy"
+                    /><button
                       class="button link"
                       type="button"
                       @click="moveLink(`/privacy-policy`)"
@@ -175,54 +212,66 @@
 </template>
 
 <script>
-import {mapState} from 'vuex';
+import { mapState } from "vuex";
+import { DIRECTION_TYPE } from "@/const/external";
 
 export default {
   data() {
     return {
       tab: 1,
       loginForm: {
-        email: '',
-        password: '',
+        email: "",
+        password: "",
       },
       registerForm: {
-        name: '',
-        email: '',
-        password: '',
-        passwordConfirmation: '',
+        name: "",
+        email: "",
+        password: "",
+        passwordConfirmation: "",
         termsOfService: false,
         privacyPolicy: false,
+      },
+      settingParams: {
+        distance: [0, 100],
+        min: 0,
+        max: 100,
+        directionType: DIRECTION_TYPE.NONE.NUM,
       },
     };
   },
   computed: mapState({
-    loginErrors: state => state.auth.loginErrorMessages,
-    registerErrors: state => state.auth.registerErrorMessages,
-    loading: state => state.common.loading,
+    loginErrors: (state) => state.auth.loginErrorMessages,
+    registerErrors: (state) => state.auth.registerErrorMessages,
+    loading: (state) => state.common.loading,
   }),
   mounted() {
-    this.$store.commit('common/setLoading', false)
+    this.$store.commit("common/setLoading", false);
   },
   methods: {
-    async login() {
-      this.$store.commit('common/setLoading', true)
+    login() {
+      this.$store.commit("common/setLoading", true);
       const data = this.loginForm;
       const router = this.$router;
-      this.$store.dispatch('auth/login', {data, router});
-      this.$store.commit('external/setSuggestPushing', true);
+      this.$store.dispatch("auth/login", { data, router });
+      this.$store.commit("external/setSuggestPushing", true);
     },
-    register() {
-      this.$store.commit('common/setLoading', true)
+    async register() {
+      this.$store.commit("common/setLoading", true);
       const data = this.registerForm;
       const router = this.$router;
-      this.$store.dispatch('auth/register', {data, router});
+
+      // Register
+      await this.$store.dispatch("auth/register", { data, router });
+
+      // Set setting
+      await this.$store.dispatch("external/setSetting", this.settingParams);
     },
     clearError() {
-      this.$store.commit('auth/setLoginErrorMessages', null);
-      this.$store.commit('auth/setRegisterErrorMessages', null);
+      this.$store.commit("auth/setLoginErrorMessages", null);
+      this.$store.commit("auth/setRegisterErrorMessages", null);
     },
     moveLink(url) {
-      window.open(url, '_blank');
+      window.open(url, "_blank");
     },
   },
   created() {

@@ -186,10 +186,12 @@ const actions = {
       context.commit('setErrorMessages', errors)
     }
   },
-  async setSetting(context, { states, parameters }) {
-    context.commit('setSetting', states)
+  async setSetting(context, params) {
+    context.commit('setSetting', params)
     context.commit('setSettingModal', false)
-    await axios.post(API.SETTING, parameters)
+    await axios.post(API.SETTING, params)
+
+    // TODO: error handling
   },
   async setDirectionType(context, data) {
     context.commit('setDirectionType', data)

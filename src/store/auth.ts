@@ -51,6 +51,7 @@ const actions = {
   async register(context, { data, router }) {
     context.commit("setApiStatus", null);
     const response = await axios.post(API.REGISTER, data);
+
     if (response.status === CREATED) {
       context.commit("setApiStatus", true);
       context.commit("setUser", response.data);
@@ -117,6 +118,7 @@ const actions = {
     const user = response.data || null;
 
     if (response.status === OK) {
+      // FIXME: 
       console.log("bbbbbbbbb");
       context.commit("setApiStatus", true);
       context.commit("setUser", user);
