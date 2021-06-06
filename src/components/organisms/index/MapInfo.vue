@@ -116,6 +116,7 @@ export default {
           directionType: this.directionType,
         },
       };
+      console.log(data)
       await this.$store.dispatch("kw/getNearBySearch", data);
       const distanceLatLng = {
         params: {

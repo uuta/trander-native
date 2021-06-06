@@ -18,27 +18,28 @@
 
 <script>
 import { mapState } from "vuex";
-import Keyword from "../../molecules/mapInfo/kw/Keyword.vue";
-import ValidationCommon from "../../atoms/validations/Common.vue";
+import Keyword from "@/components/molecules/mapInfo/kw/Keyword.vue";
+import ValidationCommon from "@/components/atoms/validations/Common.vue";
+import SliderTextList from '@/components/atoms/slider/TextList.vue'
 
 export default {
   data() {
     return {
       exKeywords: [
-        "観光名所",
-        "温泉",
-        "焼肉",
-        "寺",
-        "神社",
-        "寿司",
-        "公園",
-        "カフェ",
+        "tourist attraction",
+        "hot spring",
+        "temple",
+        "shrine",
+        "sushi",
+        "park",
+        "cafe",
       ],
     };
   },
   components: {
     Keyword,
     ValidationCommon,
+    SliderTextList,
   },
   computed: {
     ...mapState({
