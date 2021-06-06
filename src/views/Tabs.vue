@@ -30,7 +30,7 @@ export default {
   components: { IonLabel, IonTabs, IonTabBar, IonTabButton, IonIcon, IonPage },
   data() {
     return {
-      pin: "/assets/icon/logo.png"
+      pin: "/assets/icons/logo.png"
     }
   },
   setup() {

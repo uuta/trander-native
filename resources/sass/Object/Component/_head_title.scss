@@ -25,11 +25,13 @@
       dt {
         padding-right: 5px;
         padding-bottom: 10px;
+        font-size: $font-big;
       }
 
       dd {
         margin-inline-start: 0;
         font-weight: normal;
+        font-size: $font-big;
 
         .country_flag {
           -webkit-filter: drop-shadow(1px 3px 5px rgba(0, 0, 0, 0.2));

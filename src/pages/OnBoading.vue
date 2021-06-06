@@ -2,7 +2,7 @@
   <ion-page>
     <ion-header>
       <ion-toolbar>
-        <ion-title><img src="/assets/icon/logo.png"></ion-title>
+        <ion-title><img src="/assets/icons/logo.png"></ion-title>
       </ion-toolbar>
     </ion-header>
     <ion-content :fullscreen="true">

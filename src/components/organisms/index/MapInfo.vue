@@ -38,7 +38,6 @@ import CityIntroduction from "../../molecules/mapInfo/city/Introduction.vue";
 import KwIntroduction from "../kw/Introduction.vue";
 import KwItem from "../kw/Item.vue";
 import SearchList from "../../molecules/tab/SearchList.vue";
-import { ServiceStorage } from "@/services/common/storage";
 
 export default {
   data() {
@@ -116,7 +115,6 @@ export default {
           directionType: this.directionType,
         },
       };
-      console.log(data)
       await this.$store.dispatch("kw/getNearBySearch", data);
       const distanceLatLng = {
         params: {

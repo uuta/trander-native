@@ -4,7 +4,6 @@ import {
   UNPROCESSABLE_ENTITY,
 } from '../const/util'
 import axios from 'axios';
-import { ServiceStorage } from "@/services/common/storage";
 
 import {
   DIRECTION_TYPE
@@ -153,10 +152,10 @@ const actions = {
     if (res.status === OK && Object.keys(res.data).length) {
       const settings = {
         distance: [
-          res.data.min_distance,
-          res.data.max_distance
+          res.data.minDistance,
+          res.data.maxDistance
         ],
-        directionType: res.data.direction_type,
+        directionType: res.data.directionType,
       }
       context.commit('setSetting', settings)
     }
