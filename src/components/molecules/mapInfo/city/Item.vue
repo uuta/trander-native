@@ -1,12 +1,12 @@
 <template>
   <dl class="map_info_items">
-    <dt class="title"><i class="fas fa-smile"></i>荷物をまとめて出かけよう！</dt>
+    <dt class="title">Let's give a shot!</dt>
     <dd class="list">
       <img :src="setCountryImg" class="country_flag">
       <span class="desc">{{region + " " + cityName }}</span>
     </dd>
-    <dd class="list info">距離：{{distance}} km</dd>
-    <dd class="list info">方角：{{direction}}</dd>
+    <dd class="list info">Distance：{{distance}} km</dd>
+    <dd class="list info">Direction：{{direction}}</dd>
     <dd class="list">
       <ul class="flex items">
         <li class="item"><i class="fas fa-walking" :class="[

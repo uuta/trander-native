@@ -3,7 +3,7 @@
     <dt class="title">Explore the cities</dt>
     <dd class="list">
       Hi, {{ username }}!<br>
-      ボタンを押して、近くの街を探してみましょう。
+      Press the button to find a city near you.
     </dd>
   </dl>
 </template>

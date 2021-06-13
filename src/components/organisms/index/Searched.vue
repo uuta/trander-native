@@ -4,13 +4,13 @@
       <div class="c-modal__msg__section">
         <div>
           <dl v-if="cityName" class="c-head_title__mid__modal">
-            <dt><i class="fas fa-crown"></i>近くの街を見つけました！</dt>
+            <dt>Find a new city!</dt>
             <dd>
               <img :src="setCountryImg" class="country_flag">
               <span class="desc">{{region + " " + cityName }}</span>
             </dd>
           </dl>
-          <p> 早速、冒険に出てみましょう！</p>
+          <p>Wanna trip?</p>
         </div>
       </div>
       <button class="button__modal" @click="hiddenModal">OK</button>
