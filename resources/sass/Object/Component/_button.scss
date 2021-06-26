@@ -170,6 +170,7 @@
     font-weight: bold;
     color: #3316f2;
     transition: background-color 300ms ease-in-out;
+    border-radius: 0 0 20px 20px;
 
     &:hover {
       background: $sub;

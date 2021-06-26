@@ -26,6 +26,7 @@
         @extend .c-modal__overlay__wrap;
         width: 30%;
         height: 35%;
+        border-radius: 20px;
       }
     }
   }
@@ -38,6 +39,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    border-radius: 20px 20px 0 0;
 
     &.error {
       background: $gradation-error;
