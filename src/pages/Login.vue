@@ -93,52 +93,6 @@
                 icon="/assets/icons/util/lock.png"
                 @input="reflectPasswordConfirmation"
               />
-              <!-- <label for="username">お名前</label>
-              <div class="form__wrap">
-                <div class="c-icon__name"></div>
-                <input
-                  type="text"
-                  class="form__item"
-                  id="username"
-                  v-model="registerForm.name"
-                  placeholder="例）Trander太郎"
-                />
-              </div>
-              <label for="email">メールアドレス</label>
-              <div class="form__wrap">
-                <div class="c-icon__email"></div>
-                <input
-                  type="text"
-                  class="form__item"
-                  id="email"
-                  v-model="registerForm.email"
-                  placeholder="PC・スマホどちらでも可"
-                />
-              </div>
-              <label for="password">パスワード</label>
-              <div class="form__wrap">
-                <div class="c-icon__pwd"></div>
-                <input
-                  type="password"
-                  class="form__item"
-                  id="password"
-                  v-model="registerForm.password"
-                  placeholder="6文字以上の半角英数字"
-                  autocomplete="new-password"
-                />
-              </div>
-              <label for="password-confirmation">パスワード (確認)</label>
-              <div class="form__wrap">
-                <div class="c-icon__pwd"></div>
-                <input
-                  type="password"
-                  class="form__item"
-                  id="password-confirmation"
-                  v-model="registerForm.passwordConfirmation"
-                  placeholder="6文字以上の半角英数字"
-                  autocomplete="new-password"
-                />
-              </div> -->
               <div class="form__button">
                 <Submit text="Get sterted" />
               </div>
@@ -162,34 +116,26 @@
                   </li>
                 </ul>
               </div>
-              <label for="login-email">メールアドレス</label>
-              <div class="form__wrap">
-                <div class="c-icon__email"></div>
-                <input
-                  type="email"
-                  name="email"
-                  class="form__item"
-                  id="login-email"
-                  v-model="loginForm.email"
-                  placeholder="PC・スマホどちらでも可"
-                />
-              </div>
-              <label for="login-password">パスワード</label>
-              <div class="form__wrap">
-                <div class="c-icon__pwd"></div>
-                <input
-                  type="password"
-                  class="form__item"
-                  id="login-password"
-                  v-model="loginForm.password"
-                  placeholder="6文字以上の半角英数字"
-                  autocomplete="current-password"
-                />
-              </div>
+              <LogoInput
+                value=""
+                type="email"
+                name="email"
+                placeholder="Your email"
+                icon="/assets/icons/util/envelope.png"
+                @input="reflectLoginEmail"
+              />
+              <LogoInput
+                value=""
+                type="password"
+                name="password"
+                placeholder="Password"
+                icon="/assets/icons/util/lock.png"
+                @input="reflectLoginPassword"
+              />
               <ion-router-link href="/reset-password" class="panel__txt__right">
-                パスワードをお忘れですか？
+                Forgot your password?
               </ion-router-link>
-              <div class="form__sns__wrap">
+              <!-- <div class="form__sns__wrap">
                 <a class="form__sns__btn" href="/api/social/twitter"
                   ><i class="fab fa-twitter"></i
                 ></a>
@@ -199,11 +145,15 @@
                 <a class="form__sns__btn" href="/api/social/google"
                   ><i class="fab fa-google"></i
                 ></a>
-              </div>
+              </div> -->
               <div class="form__button">
-                <button type="submit" class="button button--inverse">
-                  ログインする
-                </button>
+                <Submit text="Get sterted" />
+              </div>
+              <div class="sns_desc">
+                <span>Or login with</span>
+              </div>
+              <div class="sns_wrap">
+                <Circle icon="/assets/icons/util/google.png"></Circle>
               </div>
             </form>
           </div>
@@ -294,6 +244,12 @@ export default {
     },
     reflectPasswordConfirmation(e) {
       this.registerForm.passwordConfirmation = e.target.value;
+    },
+    reflectLoginEmail(e) {
+      this.loginForm.email = e.target.value;
+    },
+    reflectLoginPassword(e) {
+      this.loginForm.password = e.target.value;
     },
   },
   created() {
