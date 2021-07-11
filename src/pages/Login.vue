@@ -14,17 +14,143 @@
               :class="{ 'tab__item--active': tab === 1 }"
               @click="tab = 1"
             >
-              ログイン
+              Sign up
             </li>
             <li
               class="tab__item"
               :class="{ 'tab__item--active': tab === 2 }"
               @click="tab = 2"
             >
-              会員登録
+              Login
             </li>
           </ul>
           <div class="panel" v-show="tab === 1">
+            <form class="form" @submit.prevent="register">
+              <div v-if="registerErrors" class="errors">
+                <ul v-if="registerErrors.name">
+                  <li v-for="msg in registerErrors.name" :key="msg">
+                    {{ msg }}
+                  </li>
+                </ul>
+                <ul v-if="registerErrors.email">
+                  <li v-for="msg in registerErrors.email" :key="msg">
+                    {{ msg }}
+                  </li>
+                </ul>
+                <ul v-if="registerErrors.password">
+                  <li v-for="msg in registerErrors.password" :key="msg">
+                    {{ msg }}
+                  </li>
+                </ul>
+                <ul v-if="registerErrors.passwordConfirmation">
+                  <li
+                    v-for="msg in registerErrors.passwordConfirmation"
+                    :key="msg"
+                  >
+                    {{ msg }}
+                  </li>
+                </ul>
+                <ul v-if="registerErrors.termsOfService">
+                  <li v-for="msg in registerErrors.termsOfService" :key="msg">
+                    {{ msg }}
+                  </li>
+                </ul>
+                <ul v-if="registerErrors.privacyPolicy">
+                  <li v-for="msg in registerErrors.privacyPolicy" :key="msg">
+                    {{ msg }}
+                  </li>
+                </ul>
+              </div>
+              <LogoInput
+                value=""
+                type="name"
+                name="name"
+                placeholder="Username"
+                icon="/assets/icons/util/user.png"
+                @input="reflectName"
+              />
+              <LogoInput
+                value=""
+                type="email"
+                name="email"
+                placeholder="Your email"
+                icon="/assets/icons/util/envelope.png"
+                @input="reflectEmail"
+              />
+              <LogoInput
+                value=""
+                type="password"
+                name="password"
+                placeholder="At least 6 characters"
+                icon="/assets/icons/util/lock.png"
+                @input="reflectPassword"
+              />
+              <LogoInput
+                value=""
+                type="password"
+                name="password"
+                placeholder="At least 6 characters"
+                icon="/assets/icons/util/lock.png"
+                @input="reflectPasswordConfirmation"
+              />
+              <!-- <label for="username">お名前</label>
+              <div class="form__wrap">
+                <div class="c-icon__name"></div>
+                <input
+                  type="text"
+                  class="form__item"
+                  id="username"
+                  v-model="registerForm.name"
+                  placeholder="例）Trander太郎"
+                />
+              </div>
+              <label for="email">メールアドレス</label>
+              <div class="form__wrap">
+                <div class="c-icon__email"></div>
+                <input
+                  type="text"
+                  class="form__item"
+                  id="email"
+                  v-model="registerForm.email"
+                  placeholder="PC・スマホどちらでも可"
+                />
+              </div>
+              <label for="password">パスワード</label>
+              <div class="form__wrap">
+                <div class="c-icon__pwd"></div>
+                <input
+                  type="password"
+                  class="form__item"
+                  id="password"
+                  v-model="registerForm.password"
+                  placeholder="6文字以上の半角英数字"
+                  autocomplete="new-password"
+                />
+              </div>
+              <label for="password-confirmation">パスワード (確認)</label>
+              <div class="form__wrap">
+                <div class="c-icon__pwd"></div>
+                <input
+                  type="password"
+                  class="form__item"
+                  id="password-confirmation"
+                  v-model="registerForm.passwordConfirmation"
+                  placeholder="6文字以上の半角英数字"
+                  autocomplete="new-password"
+                />
+              </div> -->
+              <div class="form__button">
+                <Submit text="Get sterted" />
+              </div>
+              <div class="sns_desc">
+                <span>Or signup with</span>
+              </div>
+              <div class="sns_wrap">
+                <Circle icon="/assets/icons/util/google.png"></Circle>
+              </div>
+            </form>
+          </div>
+          <div class="panel" v-show="tab === 2">
             <form class="form" name="form" @submit.prevent="login">
               <div v-if="loginErrors" class="errors">
                 <ul v-if="loginErrors.email">
@@ -81,130 +207,6 @@
               </div>
             </form>
           </div>
-          <div class="panel" v-show="tab === 2">
-            <div class="panel__hr">会員登録しましょう</div>
-            <div class="panel__txt">
-              こんにちは！もしよろしければあなたのことを教えてください。<br />以下の4つの項目を埋めるだけで<strong>会員登録は完了</strong>です。
-            </div>
-            <form class="form" @submit.prevent="register">
-              <div v-if="registerErrors" class="errors">
-                <ul v-if="registerErrors.name">
-                  <li v-for="msg in registerErrors.name" :key="msg">
-                    {{ msg }}
-                  </li>
-                </ul>
-                <ul v-if="registerErrors.email">
-                  <li v-for="msg in registerErrors.email" :key="msg">
-                    {{ msg }}
-                  </li>
-                </ul>
-                <ul v-if="registerErrors.password">
-                  <li v-for="msg in registerErrors.password" :key="msg">
-                    {{ msg }}
-                  </li>
-                </ul>
-                <ul v-if="registerErrors.passwordConfirmation">
-                  <li
-                    v-for="msg in registerErrors.passwordConfirmation"
-                    :key="msg"
-                  >
-                    {{ msg }}
-                  </li>
-                </ul>
-                <ul v-if="registerErrors.termsOfService">
-                  <li v-for="msg in registerErrors.termsOfService" :key="msg">
-                    {{ msg }}
-                  </li>
-                </ul>
-                <ul v-if="registerErrors.privacyPolicy">
-                  <li v-for="msg in registerErrors.privacyPolicy" :key="msg">
-                    {{ msg }}
-                  </li>
-                </ul>
-              </div>
-              <label for="username">お名前</label>
-              <div class="form__wrap">
-                <div class="c-icon__name"></div>
-                <input
-                  type="text"
-                  class="form__item"
-                  id="username"
-                  v-model="registerForm.name"
-                  placeholder="例）Trander太郎"
-                />
-              </div>
-              <label for="email">メールアドレス</label>
-              <div class="form__wrap">
-                <div class="c-icon__email"></div>
-                <input
-                  type="text"
-                  class="form__item"
-                  id="email"
-                  v-model="registerForm.email"
-                  placeholder="PC・スマホどちらでも可"
-                />
-              </div>
-              <label for="password">パスワード</label>
-              <div class="form__wrap">
-                <div class="c-icon__pwd"></div>
-                <input
-                  type="password"
-                  class="form__item"
-                  id="password"
-                  v-model="registerForm.password"
-                  placeholder="6文字以上の半角英数字"
-                  autocomplete="new-password"
-                />
-              </div>
-              <label for="password-confirmation">パスワード (確認)</label>
-              <div class="form__wrap">
-                <div class="c-icon__pwd"></div>
-                <input
-                  type="password"
-                  class="form__item"
-                  id="password-confirmation"
-                  v-model="registerForm.passwordConfirmation"
-                  placeholder="6文字以上の半角英数字"
-                  autocomplete="new-password"
-                />
-              </div>
-              <div class="list-menu">
-                <ul>
-                  <label
-                    ><input
-                      type="checkbox"
-                      v-model="registerForm.termsOfService"
-                    /><button
-                      class="button link"
-                      type="button"
-                      @click="moveLink(`/terms-of-service`)"
-                    >
-                      利用規約</button
-                    >に同意する</label
-                  >
-                </ul>
-                <ul>
-                  <label
-                    ><input
-                      type="checkbox"
-                      v-model="registerForm.privacyPolicy"
-                    /><button
-                      class="button link"
-                      type="button"
-                      @click="moveLink(`/privacy-policy`)"
-                    >
-                      プライバシーポリシー</button
-                    >に同意する</label
-                  >
-                </ul>
-              </div>
-              <div class="form__button">
-                <button type="submit" class="button button--inverse">
-                  <span>会員登録する</span>
-                </button>
-              </div>
-            </form>
-          </div>
         </div>
       </div>
     </ion-content>
@@ -214,6 +216,9 @@
 <script>
 import { mapState } from "vuex";
 import { DIRECTION_TYPE } from "@/const/external";
+import LogoInput from "@/components/atoms/input/LogoInput.vue";
+import Submit from "@/components/atoms/button/Submit.vue";
+import Circle from "@/components/atoms/button/Circle.vue";
 
 export default {
   data() {
@@ -238,6 +243,11 @@ export default {
         directionType: DIRECTION_TYPE.NONE.NUM,
       },
     };
+  },
+  components: {
+    LogoInput,
+    Submit,
+    Circle,
   },
   computed: mapState({
     loginErrors: (state) => state.auth.loginErrorMessages,
@@ -273,9 +283,35 @@ export default {
     moveLink(url) {
       window.open(url, "_blank");
     },
+    reflectName(e) {
+      this.registerForm.name = e.target.value;
+    },
+    reflectEmail(e) {
+      this.registerForm.email = e.target.value;
+    },
+    reflectPassword(e) {
+      this.registerForm.password = e.target.value;
+    },
+    reflectPasswordConfirmation(e) {
+      this.registerForm.passwordConfirmation = e.target.value;
+    },
   },
   created() {
     this.clearError();
   },
 };
 </script>
+<style lang="scss" scoped>
+.sns_desc {
+  margin-top: 40px;
+  text-align: center;
+  color: #8a8a8a;
+  font-weight: bold;
+}
+.sns_wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 90px;
+}
+</style>

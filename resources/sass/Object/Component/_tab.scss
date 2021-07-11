@@ -5,14 +5,14 @@
   padding: 0;
 
   &__item {
-    border-bottom: 2px solid $primary-s;
-    color: $primary;
+    border-bottom: 4px solid $sub;
+    color: $sub-v;
     cursor: pointer;
     margin: 0 1rem 0 0;
     padding: 1rem;
 
     &--active {
-      border-bottom: 2px solid $primary-v;
+      border-bottom: 4px solid $primary-v;
       color: $primary-v;
       font-weight: bold;
     }
@@ -21,12 +21,10 @@
 
 @media screen and (max-width: 480px) {
   .tab {
-    justify-content: center;
-
     &__item {
-
-      width: 50%;
+      font-size: $font-big;
       text-align: center;
+      font-weight: bold;
     }
   }
 }
