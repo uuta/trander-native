@@ -18,52 +18,6 @@
     </dd>
     <dd class="list info">Distance：{{ distance }} km</dd>
     <dd class="list info">Direction：{{ direction }}</dd>
-    <dd class="list">
-      <ul class="flex items">
-        <li class="item">
-          <i
-            class="fas fa-walking"
-            :class="[
-              walking === RECOMMEND_FREQUENCY.NONE
-                ? 'none'
-                : walking === RECOMMEND_FREQUENCY.MIDDLE
-                ? 'middle'
-                : 'high',
-            ]"
-          ></i>
-        </li>
-        <li class="item">
-          <i
-            class="fas fa-biking"
-            :class="[
-              bycicle === RECOMMEND_FREQUENCY.NONE
-                ? 'none'
-                : bycicle === RECOMMEND_FREQUENCY.MIDDLE
-                ? 'middle'
-                : 'high',
-            ]"
-          ></i>
-        </li>
-        <li class="item">
-          <i
-            class="fas fa-car"
-            :class="[
-              car === RECOMMEND_FREQUENCY.NONE
-                ? 'none'
-                : car === RECOMMEND_FREQUENCY.MIDDLE
-                ? 'middle'
-                : 'high',
-            ]"
-          ></i>
-        </li>
-        <a :href="googleMapUrl" target="_blank" class="link">
-          <li class="item"><img src="/assets/icons/kws/google-maps.svg" /></li>
-        </a>
-        <a :href="streetViewUrl" target="_blank" class="link">
-          <li class="item"><img src="/assets/icons/kws/street-view.svg" /></li>
-        </a>
-      </ul>
-    </dd>
     <Keyword></Keyword>
     <SliderTextList
       :keywords="exKeywords"
@@ -74,13 +28,7 @@
       :errorMessages="errorMessages"
     ></ValidationCommon>
     <dd class="container head_share">
-      <a :href="twitterUrl" target="_blank" class="link">
-        <ContainerIconText
-          text="Share on Twitter"
-          :image="twitter"
-          className="c-wrap_icon_text"
-        ></ContainerIconText>
-      </a>
+      <Buttons />
     </dd>
   </dl>
 </template>
@@ -92,8 +40,8 @@ import IconText from "../../atoms/container/IconText.vue";
 import Rating from "../../atoms/container/Rating.vue";
 import Keyword from "../../molecules/mapInfo/kw/Keyword.vue";
 import ValidationCommon from "../../atoms/validations/Common.vue";
-import ContainerIconText from "../../atoms/container/IconText.vue";
 import SliderTextList from "@/components/atoms/slider/TextList.vue";
+import Buttons from "@/components/organisms/kw/Buttons.vue";
 
 export default {
   data() {
@@ -118,8 +66,8 @@ export default {
     Rating,
     Keyword,
     ValidationCommon,
-    ContainerIconText,
     SliderTextList,
+    Buttons,
   },
   computed: {
     ...mapState({

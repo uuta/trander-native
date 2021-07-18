@@ -135,17 +135,6 @@
               <ion-router-link href="/reset-password" class="panel__txt__right">
                 Forgot your password?
               </ion-router-link>
-              <!-- <div class="form__sns__wrap">
-                <a class="form__sns__btn" href="/api/social/twitter"
-                  ><i class="fab fa-twitter"></i
-                ></a>
-                <a class="form__sns__btn" href="/api/social/facebook"
-                  ><i class="fab fa-facebook-f"></i
-                ></a>
-                <a class="form__sns__btn" href="/api/social/google"
-                  ><i class="fab fa-google"></i
-                ></a>
-              </div> -->
               <div class="form__button">
                 <Submit text="Get sterted" />
               </div>
