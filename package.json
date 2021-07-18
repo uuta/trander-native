@@ -10,7 +10,10 @@
     "lint": "vue-cli-service lint",
     "copy": "npm run build && npx cap copy",
     "watch": "vue-cli-service build --watch",
-    "sass": "node-sass --include-path scss resources/sass/app.scss public/css/app.css --watch"
+    "sass": "node-sass --include-path scss resources/sass/app.scss public/css/app.css --watch",
+    "resources": "capacitor-resources -p ios,android",
+    "resources-ios": "capacitor-resources -p ios",
+    "resources-android": "capacitor-resources -p android"
   },
   "dependencies": {
     "@capacitor/android": "^2.4.6",
@@ -18,6 +21,7 @@
     "@capacitor/ios": "^2.4.6",
     "@ionic/vue": "^5.4.0",
     "@ionic/vue-router": "^5.4.0",
+    "capacitor-resources": "^2.0.5",
     "core-js": "^3.6.5",
     "vue-router": "^4.0.0-0"
   },
