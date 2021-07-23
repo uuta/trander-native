@@ -10,7 +10,6 @@ import {
 } from '../const/external'
 import { API } from '@/const/api';
 
-
 const state = {
   cityName: null,
   cityId: null,
@@ -44,27 +43,37 @@ const state = {
   weathers: null,
   wiki: null,
   searchingUrl: null,
+  rating: null,
+  photo: null,
+  vicinity: null,
+  userRatingsTotal: null,
+  priceLevel: null,
+  placeId: null,
+  ratingStar: null,
 }
 
 const getters = {}
 
 const mutations = {
   setNewLocation(state, value) {
-    state.cityName = value.city
-    state.cityId = value.id
-    state.region = value.region
+    state.cityName = value.name
+    state.wikiDataId = value.wikiDataId
+    state.distance = value.distance
+    state.direction = value.direction
     state.countryCode = value.countryCode
-    state.lat = value.latitude
-    state.lng = value.longitude
+    state.rating = value.rating
+    state.photo = value.photo
+    state.vicinity = value.vicinity
+    state.userRatingsTotal = value.userRatingsTotal
+    state.priceLevel = value.priceLevel
+    state.lat = value.lat
+    state.lng = value.lng
+    state.placeId = value.placeId
+    state.ratingStar = value.ratingStar
     state.wikiDataId = value.wikiDataId
     state.icon = true
     state.modal = true
     setTimeout(() => state.suggestPushing = true, 5000)
-    state.distance = value.distance
-    state.direction = value.direction
-    state.walking = value.ways.walking
-    state.bycicle = value.ways.bycicle
-    state.car = value.ways.car
   },
   setModal(state, value) {
     state.modal = value
@@ -171,16 +180,16 @@ const actions = {
   },
   async setNewLocation(context, { data }) {
     context.commit('setSuggestPushing', false)
-    const res = await axios.post(API.GEO_DB_CITIES, data)
+    const res = await axios.get(API.CITIES, data)
 
     // レスポンスが空ではない時の処理
-    if (res.status === OK && res.data.status === OK) {
-      const resData = res.data.data[0]
+    if (res.status === OK) {
+      const resData = res.data.data
       context.commit('setNewLocation', resData)
     }
 
     // レスポンスが空の処理
-    if (res.status === OK && res.data.status === NO_RECORD) {
+    if (res.status === NO_RECORD) {
       const errors = res.data.errors.message
       context.commit('setErrorMessages', errors)
     }

@@ -10,9 +10,6 @@
         <KwItem v-if="kwSuccessful"></KwItem>
         <KwIntroduction v-else></KwIntroduction>
       </template>
-      <transition name="fade">
-        <SuggestPushing v-show="suggestPushing"></SuggestPushing>
-      </transition>
     </div>
     <button
       @click="
@@ -32,7 +29,6 @@
 <script>
 import { mapState } from "vuex";
 import { URL_TYPE } from "@/const/common.ts";
-import SuggestPushing from "@/components/atoms/modal/Pushing.vue";
 import CityItem from "../../molecules/mapInfo/city/Item.vue";
 import CityIntroduction from "../../molecules/mapInfo/city/Introduction.vue";
 import KwIntroduction from "../kw/Introduction.vue";
@@ -46,7 +42,6 @@ export default {
     };
   },
   components: {
-    SuggestPushing,
     CityItem,
     CityIntroduction,
     KwItem,
@@ -74,11 +69,13 @@ export default {
   methods: {
     setNewLocation() {
       const data = {
-        lat: this.currentLat,
-        lng: this.currentLng,
-        min: this.rangeOfDistance[0],
-        max: this.rangeOfDistance[1],
-        directionType: this.directionType,
+        params: {
+          lat: this.currentLat,
+          lng: this.currentLng,
+          min: this.rangeOfDistance[0],
+          max: this.rangeOfDistance[1],
+          directionType: this.directionType,
+        },
       };
       const router = this.$router;
       this.showProgressBar(data, router);

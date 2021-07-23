@@ -9,6 +9,7 @@ export const API = {
   DISTANCE: process.env.VUE_APP_API_DOMAIN + '/api/distance',
   SETTING: process.env.VUE_APP_API_DOMAIN + '/api/setting',
   GEO_DB_CITIES: process.env.VUE_APP_API_DOMAIN + '/api/external/geo-db-cities',
+  CITIES: process.env.VUE_APP_API_DOMAIN + '/api/cities',
   WIKI_CITY: process.env.VUE_APP_API_DOMAIN + '/api/external/wiki-city',
   FACILITY: process.env.VUE_APP_API_DOMAIN + '/api/external/facility',
   HOTEL: process.env.VUE_APP_API_DOMAIN + '/api/external/hotel',
