@@ -92,12 +92,12 @@ export default {
         padding-left: 5px;
       }
 
-      ::v-deep .icon {
+      ::v-deep(.icon) {
         width: 20px;
         vertical-align: middle;
       }
 
-      ::v-deep .description {
+      ::v-deep(.description) {
         line-height: 30px;
         font-size: 1.2rem;
         font-weight: bold;

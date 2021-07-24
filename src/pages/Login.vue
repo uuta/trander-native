@@ -1,6 +1,6 @@
 <template>
   <ion-page>
-    <ion-header class="ion-no-border">
+    <ion-header class="ion-no-border shadow">
       <ion-toolbar>
         <ion-title><img src="/assets/icons/logo.png"/></ion-title>
       </ion-toolbar>
