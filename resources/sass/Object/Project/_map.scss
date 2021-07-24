@@ -92,6 +92,7 @@
           -ms-filter: drop-shadow(1px 3px 5px rgba(0, 0, 0, 0.2));
           filter: drop-shadow(1px 3px 5px rgba(0, 0, 0, 0.2));
           vertical-align: middle;
+          margin-right: 5px;
         }
 
         .desc {
@@ -186,7 +187,7 @@
       margin: 0;
 
       .title {
-        text-align: center;
+        text-align: left;
 
         i {
           padding-right: 10px;
@@ -195,6 +196,18 @@
 
       .list {
         width: 80%;
+        color: $sub-v;
+
+        &:before {
+          content: "\f124";
+          font-family: "Font Awesome 5 Free";
+          font-weight: 900;
+          color: $secondary;
+          margin-right: 0.5rem;
+          -moz-filter: drop-shadow(1px 3px 5px rgba(0, 0, 0, 0.2));
+          -ms-filter: drop-shadow(1px 3px 5px rgba(0, 0, 0, 0.2));
+          filter: drop-shadow(1px 3px 5px rgba(0, 0, 0, 0.2));
+        }
       }
     }
   }
@@ -258,7 +271,7 @@
 
     &_info {
       width: 90%;
-      padding: 15px 15px;
+      padding: 20px;
       // top: 20px;
       bottom: 20px;
 

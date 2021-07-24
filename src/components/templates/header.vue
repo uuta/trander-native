@@ -6,7 +6,7 @@
           <ion-icon :icon="menu"></ion-icon>
         </ion-menu-button>
       </ion-buttons>
-      <ion-title>Explore cities</ion-title>
+      <ion-title><img src="/assets/icons/logo.png"></ion-title>
     </ion-toolbar>
   </ion-header>
 </template>

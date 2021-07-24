@@ -10,7 +10,6 @@
               <span class="desc">{{ cityName }}</span>
             </dd>
           </dl>
-          <p>Wanna trip?</p>
         </div>
         <Explore
           :twitterUrl="twitterUrl"
