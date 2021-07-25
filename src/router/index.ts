@@ -7,11 +7,13 @@ const routes: Array<RouteRecordRaw> = [
     path: '/',
     component: () => import('@/pages/OnBoading.vue'),
     beforeEnter(to, from, next) {
-      if (store.getters['auth/check']) {
-        next('/index')
-      } else {
-        next()
-      }
+      store.dispatch('auth/currentUser').then(() => {
+        if (store.getters['auth/check']) {
+          next('/index')
+        } else {
+          next()
+        }
+      });
     }
   },
   {
