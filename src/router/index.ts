@@ -30,6 +30,32 @@ const routes: Array<RouteRecordRaw> = [
     }
   },
   {
+    path: '/password/reset',
+    component: () => import('@/pages/password/Reset.vue'),
+    beforeEnter(to, from, next) {
+      store.dispatch('auth/currentUser').then(() => {
+        if (store.getters['auth/check']) {
+          next('/index')
+        } else {
+          next()
+        }
+      });
+    }
+  },
+  {
+    path: '/password/sent',
+    component: () => import('@/pages/password/Sent.vue'),
+    beforeEnter(to, from, next) {
+      store.dispatch('auth/currentUser').then(() => {
+        if (store.getters['auth/check']) {
+          next('/index')
+        } else {
+          next()
+        }
+      });
+    }
+  },
+  {
     path: '/index',
     component: () => import('@/pages/index/City.vue'),
     children: [

@@ -146,7 +146,7 @@ const actions = {
 
     if (response.status === OK) {
       context.commit("setEmail", data);
-      router.push("/sent-email");
+      window.location.href = '/password/sent';
       return false;
     }
 

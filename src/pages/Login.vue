@@ -132,7 +132,7 @@
                 icon="/assets/icons/util/lock.png"
                 @input="reflectLoginPassword"
               />
-              <ion-router-link href="/reset-password" class="panel__txt__right">
+              <ion-router-link href="/password/reset" class="panel__txt__right">
                 Forgot your password?
               </ion-router-link>
               <div class="form__button">
