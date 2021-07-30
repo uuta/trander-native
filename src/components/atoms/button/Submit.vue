@@ -25,7 +25,7 @@ export default {
   border-radius: 20px;
   font-size: 1.2rem;
   font-weight: bold;
-  filter: drop-shadow(4px 4px 3px rgba(0, 0, 0, 0.1));
+  filter: drop-shadow(4px 4px 10px rgba(0, 0, 0, 0.3));
   &:hover {
     cursor: pointer;
     color: #fff;
