@@ -56,6 +56,23 @@ const routes: Array<RouteRecordRaw> = [
     }
   },
   {
+    path: '/password/regenerate',
+    component: () => import('@/pages/password/Regenerate.vue'),
+    beforeEnter(to, from, next) {
+      store.dispatch('auth/currentUser').then(() => {
+        if (store.getters['auth/check']) {
+          next('/index')
+        } else {
+          next()
+        }
+      });
+    }
+  },
+  {
+    path: '/password/complete',
+    component: () => import('@/pages/password/Complete.vue'),
+  },
+  {
     path: '/index',
     component: () => import('@/pages/index/City.vue'),
     children: [

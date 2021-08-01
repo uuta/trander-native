@@ -102,6 +102,8 @@ const actions = {
     context.commit("setApiStatus", null);
     const response = await axios.post(API.LOGOUT);
 
+    // TODO: Delete an apiToken
+
     if (response.status === OK) {
       context.commit("setApiStatus", true);
       context.commit("setUser", null);
@@ -113,6 +115,11 @@ const actions = {
   },
   async currentUser(context) {
     context.commit("setApiStatus", null);
+
+    // TODO:
+    // ServiceStorage.removeItem(
+    //   ServiceStorage.KEY_API_TOKEN,
+    // );
 
     const response = await axios.get(API.USER);
     const user = response.data || null;
@@ -159,14 +166,20 @@ const actions = {
       });
     }
   },
-  async regeneratePassword(context, { data, router }) {
+  async regeneratePassword(context, data) {
     context.commit("setApiStatus", null);
-    data["token"] = router.app._route.params.token;
-    const response = await axios.post(API.REGENERATE_PASSWORD, data);
+    const response = await axios.put(API.REGENERATE_PASSWORD, data);
+
+    // Store a token
+    ServiceStorage.setItem(
+      ServiceStorage.KEY_API_TOKEN,
+      response.data.apiToken
+    );
+
     if (response.status === OK) {
       context.commit("setApiStatus", true);
       context.commit("setUser", response.data);
-      router.push("/regenerate-password-complete");
+      window.location.href = '/password/complete';
       return false;
     }
 

@@ -4,7 +4,7 @@ export const API = {
   LOGIN: process.env.VUE_APP_API_DOMAIN + '/api/login',
   LOGOUT: process.env.VUE_APP_API_DOMAIN + '/api/logout',
   RESET_PASSWORD: process.env.VUE_APP_API_DOMAIN + '/api/reset-password',
-  REGENERATE_PASSWORD: process.env.VUE_APP_API_DOMAIN + '/api/regenerate-password',
+  REGENERATE_PASSWORD: process.env.VUE_APP_API_DOMAIN + '/api/password',
   CHANGE_REGISTRATION: process.env.VUE_APP_API_DOMAIN + '/api/change-registration',
   DISTANCE: process.env.VUE_APP_API_DOMAIN + '/api/distance',
   SETTING: process.env.VUE_APP_API_DOMAIN + '/api/setting',
