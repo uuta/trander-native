@@ -23,7 +23,7 @@ const state = {
   icon: false,
   modal: false,
   settingModal: false,
-  rangeOfDistance: [0, 100],
+  rangeOfDistance: [0, 30],
   msg: '車や電車で遠出しましょう',
   errorMessages: null,
   errorModal: false,

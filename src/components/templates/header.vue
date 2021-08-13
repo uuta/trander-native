@@ -2,7 +2,7 @@
   <ion-header class="ion-no-border navbar">
     <ion-toolbar>
       <ion-buttons slot="primary">
-        <ion-menu-button @click="openMenu">
+        <ion-menu-button @click="openMenu" class="button_header">
           <ion-icon :icon="menu"></ion-icon>
         </ion-menu-button>
       </ion-buttons>
@@ -21,6 +21,7 @@ import {
 import { menu } from "ionicons/icons";
 
 export default {
+  name: "Header",
   components: {
     IonHeader,
     IonToolbar,
@@ -39,3 +40,8 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+  @import 'resources/sass/Foundation/_color.scss';
+  @import 'resources/sass/Foundation/_var.scss';
+</style>

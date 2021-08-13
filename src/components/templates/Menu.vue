@@ -1,5 +1,11 @@
 <template>
-  <ion-menu content-id="main" side="end" class="full">
+  <ion-menu
+    content-id="main"
+    side="end"
+    swipe-gesture="false"
+    class="full"
+    type="push"
+  >
     <ion-header class="ion-no-border nml shadow">
       <ion-toolbar>
         <ion-buttons slot="primary">
@@ -12,9 +18,14 @@
     </ion-header>
     <ion-content>
       <ion-list>
-        <ion-item color="light">
-          <ion-icon :icon="compass" slot="start" class="ion-align-self-center" color="primary"></ion-icon>
-          <ion-label position="floating">Direction</ion-label>
+        <ion-item color="light" lines="none">
+          <ion-icon
+            :icon="compass"
+            slot="start"
+            class="ion-align-self-center"
+            color="secondary"
+          ></ion-icon>
+          <ion-label class="label_title">Direction</ion-label>
           <ion-select>
             <ion-select-option value="">All around</ion-select-option>
             <ion-select-option value="north">To North</ion-select-option>
@@ -24,61 +35,56 @@
           </ion-select></ion-item
         >
       </ion-list>
-      <div class="c-box">
-        <div class="wrap">
-          <title-desc title="Search Scope" desc="aaaaaaaaa"></title-desc>
-          <div class="content">
-            <vue-slider
-              ref="slider"
-              v-model="range"
-              :enable-cross="false"
-              :dotSize="20"
-              :railStyle="{
-                height: '8px',
-                border: '1px solid #6e5ce8',
-                background: '#fff',
-              }"
-              :dotStyle="{
-                backgroundColor: '#3316F2',
-                borderShadow: '#3316F2',
-                boxShadow: '#3316F2',
-              }"
-              :processStyle="{ backgroundColor: '#3316F2' }"
-              :tooltipStyle="{
-                backgroundColor: '#3316F2',
-                borderColor: '#3316F2',
-                borderShadow: '#3316F2',
-              }"
-            />
-          </div>
-        </div>
-      </div>
+      <ion-list>
+        <ion-item color="light" lines="none"
+          ><ion-icon
+            :icon="airplaneSharp"
+            slot="start"
+            color="medium"
+          ></ion-icon>
+          <ion-label class="label_title">Mode</ion-label
+          ><span class="disabled">Search around you</span></ion-item
+        >
+      </ion-list>
+      <ion-list>
+        <ion-item color="light" lines="none"
+          ><ion-icon :icon="location" slot="start" color="medium"></ion-icon>
+          <ion-label class="label_title">Nationality</ion-label
+          ><span class="disabled">All countries</span></ion-item
+        >
+      </ion-list>
+      <RangeSlide v-model:range="range"></RangeSlide>
     </ion-content>
   </ion-menu>
 </template>
 
 <script lang="ts">
-import { close, compass } from "ionicons/icons";
+import { close, compass, airplaneSharp, location } from "ionicons/icons";
 import { menuController } from "@ionic/vue";
-import VueSlider from "vue-slider-component";
-import "vue-slider-component/theme/antd.css";
-import TitleDesc from "@/components/molecules/box/TitleDesc.vue";
+import RangeSlide from "@/components/molecules/slider/RangeSlide.vue";
 
 export default {
   data() {
-    return {
-      range: [0, 100],
-    };
+    return {};
   },
   setup() {
     return {
       close,
       compass,
+      airplaneSharp,
+      location,
+      RangeSlide,
     };
   },
-  components: {
-    VueSlider,
-    TitleDesc,
+  computed: {
+    range: {
+      get() {
+        return Array.from(this.$store.state.external.rangeOfDistance);
+      },
+      set(range) {
+        this.$store.commit("external/setRangeOfDistance", range);
+      },
+    },
   },
   methods: {
     closeMenu() {
@@ -88,3 +94,19 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+::v-deep(.disabled) {
+  color: #8a8a8a;
+}
+ion-item {
+  --min-height: 70px;
+}
+.label_title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+::v-deep(.item-inner) {
+  border: none;
+}
+</style>
