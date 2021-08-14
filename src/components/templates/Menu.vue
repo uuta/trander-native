@@ -18,7 +18,7 @@
     </ion-header>
     <ion-content>
       <ion-list>
-        <ion-item color="light" lines="none">
+        <ion-item color="light" lines="none" mode="ios">
           <ion-icon
             :icon="compass"
             slot="start"
@@ -36,7 +36,7 @@
         >
       </ion-list>
       <ion-list>
-        <ion-item color="light" lines="none"
+        <ion-item color="light" lines="none" mode="ios"
           ><ion-icon
             :icon="airplaneSharp"
             slot="start"
@@ -47,13 +47,20 @@
         >
       </ion-list>
       <ion-list>
-        <ion-item color="light" lines="none"
+        <ion-item color="light" lines="none" mode="ios"
           ><ion-icon :icon="location" slot="start" color="medium"></ion-icon>
           <ion-label class="label_title">Nationality</ion-label
           ><span class="disabled">All countries</span></ion-item
         >
       </ion-list>
       <RangeSlide v-model:range="range"></RangeSlide>
+      <ion-list>
+        <ion-item color="light" lines="none" mode="ios"
+          ><ion-icon :icon="location" slot="start" color="medium"></ion-icon>
+          <ion-label class="label_title">Pricing</ion-label
+          ><span class="disabled">FREE</span></ion-item
+        >
+      </ion-list>
     </ion-content>
   </ion-menu>
 </template>

@@ -53,5 +53,7 @@ ion-item {
 .item_wrap {
   padding: 0 40px;
   margin-top: 10px;
+  padding-bottom: 20px;
+  border-bottom: 0.3px solid #e7e7e7;
 }
 </style>
