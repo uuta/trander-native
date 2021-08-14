@@ -26,7 +26,7 @@
             color="secondary"
           ></ion-icon>
           <ion-label class="label_title">Direction</ion-label>
-          <ion-select>
+          <ion-select interface="action-sheet" color="light">
             <ion-select-option value="">All around</ion-select-option>
             <ion-select-option value="north">To North</ion-select-option>
             <ion-select-option value="east">To East</ion-select-option>
@@ -56,9 +56,15 @@
       <RangeSlide v-model:range="range"></RangeSlide>
       <ion-list>
         <ion-item color="light" lines="none" mode="ios"
-          ><ion-icon :icon="location" slot="start" color="medium"></ion-icon>
+          ><ion-icon :icon="card" slot="start" color="medium"></ion-icon>
           <ion-label class="label_title">Pricing</ion-label
           ><span class="disabled">FREE</span></ion-item
+        >
+      </ion-list>
+      <ion-list>
+        <ion-item color="light" lines="none" mode="ios" button="true"
+          ><ion-icon :icon="exit" slot="start" color="danger"></ion-icon>
+          <ion-label class="label_title">Logout</ion-label></ion-item
         >
       </ion-list>
     </ion-content>
@@ -66,7 +72,14 @@
 </template>
 
 <script lang="ts">
-import { close, compass, airplaneSharp, location } from "ionicons/icons";
+import {
+  close,
+  compass,
+  airplaneSharp,
+  location,
+  card,
+  exit,
+} from "ionicons/icons";
 import { menuController } from "@ionic/vue";
 import RangeSlide from "@/components/molecules/slider/RangeSlide.vue";
 
@@ -80,6 +93,8 @@ export default {
       compass,
       airplaneSharp,
       location,
+      card,
+      exit,
       RangeSlide,
     };
   },

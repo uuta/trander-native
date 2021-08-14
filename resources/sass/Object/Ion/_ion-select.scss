@@ -1,0 +1,29 @@
+ion-select {
+}
+.action-sheet-group.sc-ion-action-sheet-ios:first-child {
+  background: $base;
+  color: $text-color;
+}
+.action-sheet-button-inner.sc-ion-action-sheet-ios {
+  color: $text-color;
+}
+.action-sheet-button.sc-ion-action-sheet-ios {
+  border-bottom: 1px solid $sub-4s;
+}
+.action-sheet-selected.sc-ion-action-sheet-ios {
+  &::after {
+    background: $secondary;
+  }
+  .action-sheet-button-inner {
+    color: $base;
+  }
+}
+.action-sheet-cancel {
+  &::after {
+    background: $sub-sss !important;
+  }
+
+  .action-sheet-button-inner {
+    color: $text-color;
+  }
+}
