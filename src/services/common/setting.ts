@@ -1,4 +1,4 @@
-import { DIRECTION_TYPE } from "@/const/external";
+import { DIRECTION_TYPES } from "@/const/external";
 
 export class Setting {
   /**
@@ -18,8 +18,8 @@ export class Setting {
    * @return {string
    */
   setDirectionText(directionType) {
-    const obj = Object.entries(DIRECTION_TYPE).filter(
-      (DIRECTION_TYPE) => DIRECTION_TYPE[1].NUM === directionType
+    const obj = Object.entries(DIRECTION_TYPES).filter(
+      (DIRECTION_TYPES) => DIRECTION_TYPES[1].NUM === directionType
     );
     return obj[0][1].TEXT;
   }

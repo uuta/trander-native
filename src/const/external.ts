@@ -12,26 +12,26 @@ const CURRENT_LOCATION_SUGGEST = Object.freeze({
   SUGGEST: 4
 })
 
-const DIRECTION_TYPE = Object.freeze({
+const DIRECTION_TYPES = Object.freeze({
   NONE: {
     NUM: 0,
-    TEXT: '指定なし'
+    TEXT: 'All around'
   },
   NORTH: {
     NUM: 1,
-    TEXT: '北（North）'
+    TEXT: 'To North'
   },
   EAST: {
     NUM: 2,
-    TEXT: '東（East）'
+    TEXT: 'To East'
   },
   SOUTH: {
     NUM: 3,
-    TEXT: '南（South）'
+    TEXT: 'To South'
   },
   WEST: {
     NUM: 4,
-    TEXT: '西（West）'
+    TEXT: 'To West'
   }
 })
 
@@ -41,5 +41,5 @@ export default {
 }
 
 export {
-  DIRECTION_TYPE
+  DIRECTION_TYPES
 }

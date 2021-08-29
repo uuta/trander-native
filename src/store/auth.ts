@@ -98,11 +98,12 @@ const actions = {
       context.commit("error/setCode", response.status, { root: true });
     }
   },
+  /**
+   * Unused function
+   **/
   async logout(context, router) {
     context.commit("setApiStatus", null);
     const response = await axios.post(API.LOGOUT);
-
-    // TODO: Delete an apiToken
 
     if (response.status === OK) {
       context.commit("setApiStatus", true);

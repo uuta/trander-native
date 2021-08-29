@@ -26,12 +26,10 @@
             color="secondary"
           ></ion-icon>
           <ion-label class="label_title">Direction</ion-label>
-          <ion-select interface="action-sheet" color="light">
-            <ion-select-option value="">All around</ion-select-option>
-            <ion-select-option value="north">To North</ion-select-option>
-            <ion-select-option value="east">To East</ion-select-option>
-            <ion-select-option value="west">To West</ion-select-option>
-            <ion-select-option value="south">To South</ion-select-option>
+          <!-- <ion-select interface="action-sheet" color="light" :value="directionType" @select="directionType"> -->
+          <!-- <ion-select interface="action-sheet" color="light" :value="directionType"  v-model="directionType" :ionChange="setDirectionType(DIRECTION_TYPE.NUM)"> -->
+          <ion-select interface="action-sheet" color="light" :value="directionType"  v-model="directionType">
+            <ion-select-option v-for="DIRECTION_TYPE in DIRECTION_TYPES" :key="DIRECTION_TYPE.NUM" :value="DIRECTION_TYPE.NUM" :ionChange="setDirectionType(DIRECTION_TYPE.NUM)">{{ DIRECTION_TYPE.TEXT }}</ion-select-option>
           </ion-select></ion-item
         >
       </ion-list>
@@ -61,17 +59,12 @@
           ><span class="disabled">FREE</span></ion-item
         >
       </ion-list>
-      <ion-list>
-        <ion-item color="light" lines="none" mode="ios" button="true"
-          ><ion-icon :icon="exit" slot="start" color="danger"></ion-icon>
-          <ion-label class="label_title">Logout</ion-label></ion-item
-        >
-      </ion-list>
+      <Logout></Logout>
     </ion-content>
   </ion-menu>
 </template>
 
-<script lang="ts">
+<script>
 import {
   close,
   compass,
@@ -82,11 +75,11 @@ import {
 } from "ionicons/icons";
 import { menuController } from "@ionic/vue";
 import RangeSlide from "@/components/molecules/slider/RangeSlide.vue";
+import Logout from "@/components/organisms/menus/Logout.vue";
+import { mapState } from "vuex";
+import { DIRECTION_TYPES } from '@/const/external'
 
 export default {
-  data() {
-    return {};
-  },
   setup() {
     return {
       close,
@@ -96,9 +89,14 @@ export default {
       card,
       exit,
       RangeSlide,
+      Logout,
+      DIRECTION_TYPES
     };
   },
   computed: {
+    ...mapState({
+      directionType: (state) => state.external.directionType,
+    }),
     range: {
       get() {
         return Array.from(this.$store.state.external.rangeOfDistance);
@@ -112,6 +110,19 @@ export default {
     closeMenu() {
       menuController.enable(true, "end");
       menuController.close("end");
+      const states = {
+        distance: this.range,
+        directionType: this.directionType,
+      };
+      const params = {
+        min: this.range[0],
+        max: this.range[1],
+        directionType: this.directionType,
+      };
+      this.$store.dispatch("external/setSetting", {states, params});
+    },
+    setDirectionType(directionType) {
+      this.$store.dispatch('external/setDirectionType', directionType)
     },
   },
 };

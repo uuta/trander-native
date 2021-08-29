@@ -6,7 +6,7 @@ import {
 import axios from 'axios';
 
 import {
-  DIRECTION_TYPE
+  DIRECTION_TYPES
 } from '../const/external'
 import { API } from '@/const/api';
 
@@ -35,7 +35,7 @@ const state = {
   car: null,
   geoLocationModal: false,
   geoLocationSetting: null,
-  directionType: DIRECTION_TYPE.NONE.NUM,
+  directionType: DIRECTION_TYPES.NONE.NUM,
   settingDirection: false,
   hotels: null,
   hotelsShowing: false,
@@ -94,6 +94,7 @@ const mutations = {
     state.lng = value.lng
   },
   setSetting(state, value) {
+    console.log(value)
     state.rangeOfDistance = value.distance
     state.directionType = value.directionType
   },
@@ -194,9 +195,8 @@ const actions = {
       context.commit('setErrorMessages', errors)
     }
   },
-  async setSetting(context, params) {
-    context.commit('setSetting', params)
-    context.commit('setSettingModal', false)
+  async setSetting(context, {states, params}) {
+    context.commit('setSetting', states)
     await axios.post(API.SETTING, params)
 
     // TODO: error handling
